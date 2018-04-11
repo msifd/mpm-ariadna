@@ -24,7 +24,7 @@ public class EntityRendererAlt extends EntityRenderer {
         player.yOffset -= data.offsetY();
         if (data.animation == EnumAnimation.SITTING)
             player.yOffset += 0.5F - data.getLegsY();
-        if (data.isSleeping())
+        if (data.isSleeping() || data.animation == EnumAnimation.CRAWLING)
             player.yOffset = 2.8F;
         if ((player.yOffset < 1.4F) && (isBlocked(player)))
             player.yOffset = 1.4F;

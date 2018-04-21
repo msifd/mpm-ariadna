@@ -15,26 +15,26 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
         this.ears = new ModelRenderer(this.base);
         addChild(this.ears);
 
-        Model2DRenderer right = new Model2DRenderer(this.base, 56.0F, 0.0F, 8, 4, 64.0F, 64.0F);
+        Model2DRenderer right = new Model2DRenderer(this.base, 24.0F, 0.0F, 8, 4, 64.0F, 64.0F);
         right.setRotationPoint(-7.44F, -7.3F, -0.0F);
         right.setScale(0.234F, 0.234F);
         right.setThickness(1.16F);
         this.ears.addChild(right);
 
-        Model2DRenderer left = new Model2DRenderer(this.base, 56.0F, 0.0F, 8, 4, 64.0F, 64.0F);
+        Model2DRenderer left = new Model2DRenderer(this.base, 24.0F, 0.0F, 8, 4, 64.0F, 64.0F);
         left.setRotationPoint(7.44F, -7.3F, 1.15F);
         left.setScale(0.234F, 0.234F);
         setRotation(left, 0.0F, 3.1415927F, 0.0F);
         left.setThickness(1.16F);
         this.ears.addChild(left);
 
-        Model2DRenderer right2 = new Model2DRenderer(this.base, 56.0F, 4.0F, 8, 4, 64.0F, 64.0F);
+        Model2DRenderer right2 = new Model2DRenderer(this.base, 24.0F, 4.0F, 8, 4, 64.0F, 64.0F);
         right2.setRotationPoint(-7.44F, -7.3F, 1.14F);
         right2.setScale(0.234F, 0.234F);
         right2.setThickness(1.16F);
         this.ears.addChild(right2);
 
-        Model2DRenderer left2 = new Model2DRenderer(this.base, 56.0F, 4.0F, 8, 4, 64.0F, 64.0F);
+        Model2DRenderer left2 = new Model2DRenderer(this.base, 24.0F, 4.0F, 8, 4, 64.0F, 64.0F);
         left2.setRotationPoint(7.44F, -7.3F, 2.31F);
         left2.setScale(0.234F, 0.234F);
         setRotation(left2, 0.0F, 3.1415927F, 0.0F);
@@ -45,13 +45,13 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
         this.bunny = new ModelRenderer(this.base);
         addChild(this.bunny);
 
-        ModelRenderer earleft = new ModelRenderer(this.base, 56, 0);
+        ModelRenderer earleft = new ModelRenderer(this.base, 24, 0);
         earleft.mirror = true;
         earleft.addBox(-1.466667F, -4.0F, 0.0F, 3, 7, 1);
         earleft.setRotationPoint(2.533333F, -11.0F, 0.0F);
         this.bunny.addChild(earleft);
 
-        ModelRenderer earright = new ModelRenderer(this.base, 56, 0);
+        ModelRenderer earright = new ModelRenderer(this.base, 24, 0);
         earright.addBox(-1.5F, -4.0F, 0.0F, 3, 7, 1);
         earright.setRotationPoint(-2.466667F, -11.0F, 0.0F);
         this.bunny.addChild(earright);

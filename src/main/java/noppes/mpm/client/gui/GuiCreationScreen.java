@@ -177,11 +177,15 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
         new EntityFakeLiving(entity.worldObj).writeEntityToNBT(fake);
 
         NBTTagCompound compound = new NBTTagCompound();
-        entity.writeEntityToNBT(compound);
-        Set<String> keys = fake.func_150296_c();
-        for (String name : keys) {
-            compound.removeTag(name);
+        try {
+            entity.writeEntityToNBT(compound);
+            Set<String> keys = fake.func_150296_c();
+            for (String name : keys) {
+                compound.removeTag(name);
+            }
+        } catch (Exception ignored) {
         }
+
         return compound;
     }
 

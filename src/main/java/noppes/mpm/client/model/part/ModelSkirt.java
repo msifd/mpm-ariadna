@@ -15,7 +15,6 @@ public class ModelSkirt extends ModelPartInterface {
 
     public ModelSkirt(ModelMPM base) {
         super(base);
-        float pi = 0.62831855F;
 
         this.Shape1 = new ModelPlaneRenderer(base, 62, 0);
         this.Shape1.addSidePlane(0.0F, 0.0F, 0.0F, 8, 2);
@@ -61,6 +60,6 @@ public class ModelSkirt extends ModelPartInterface {
         }
         this.color = config.color;
         this.isHidden = false;
-        this.location = config.getResource();
+        this.location = !config.playerTexture ? config.getResource() : null;
     }
 }

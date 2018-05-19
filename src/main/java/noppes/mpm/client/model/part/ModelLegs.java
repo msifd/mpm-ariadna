@@ -67,7 +67,7 @@ public class ModelLegs
         addChild(this.digitigrade);
 
         int baseHeight = base.textureHeight;
-        base.textureHeight = 32;
+        base.textureHeight = 64;
 
         this.spider = new ModelRenderer(base);
         addChild(this.spider);

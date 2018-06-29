@@ -66,13 +66,13 @@ public class GuiModelScale extends GuiModelInterface implements noppes.mpm.clien
     private void drawSlider(int y, ModelPartConfig config) {
         y += 15;
         addLabel(new GuiNpcLabel(10, "Width", this.guiLeft, y + 5, 16777215));
-        addSlider(new GuiNpcSlider(this, 10, this.guiLeft + 50, y, config.scaleX - 0.5F));
+        addSlider(new GuiNpcSlider(this, 10, this.guiLeft + 50, y, (config.scaleX - 0.5F) / 2.5F));
         y += 22;
         addLabel(new GuiNpcLabel(11, "Height", this.guiLeft, y + 5, 16777215));
-        addSlider(new GuiNpcSlider(this, 11, this.guiLeft + 50, y, config.scaleY - 0.5F));
+        addSlider(new GuiNpcSlider(this, 11, this.guiLeft + 50, y, (config.scaleY - 0.5F) / 2.5F));
         y += 22;
         addLabel(new GuiNpcLabel(12, "Depth", this.guiLeft, y + 5, 16777215));
-        addSlider(new GuiNpcSlider(this, 12, this.guiLeft + 50, y, config.scaleZ - 0.5F));
+        addSlider(new GuiNpcSlider(this, 12, this.guiLeft + 50, y, (config.scaleZ - 0.5F) / 2.5F));
     }
 
 
@@ -89,7 +89,8 @@ public class GuiModelScale extends GuiModelInterface implements noppes.mpm.clien
     }
 
     public void mouseDragged(GuiNpcSlider slider) {
-        int percent = (int) (50.0F + slider.sliderValue * 100.0F);
+        float value = 0.5F + slider.sliderValue * 2.5F;
+        int percent = (int) (value * 100);
         slider.setString(percent + "%");
         ModelPartConfig config = this.data.head;
         if (this.type == 1) {
@@ -100,11 +101,11 @@ public class GuiModelScale extends GuiModelInterface implements noppes.mpm.clien
             config = this.data.legs;
         }
         if (slider.id == 10)
-            config.scaleX = (slider.sliderValue + 0.5F);
+            config.scaleX = value;
         if (slider.id == 11)
-            config.scaleY = (slider.sliderValue + 0.5F);
+            config.scaleY = value;
         if (slider.id == 12) {
-            config.scaleZ = (slider.sliderValue + 0.5F);
+            config.scaleZ = value;
         }
     }
 

@@ -68,20 +68,26 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
         this.prev.enabled = (getCurrentEntityIndex() >= 0);
         this.next.enabled = (getCurrentEntityIndex() < this.list.size() - 1);
 
-        addButton(new GuiNpcButton(46, this.guiLeft + 310, this.guiTop + 58, 80, 20, "Reload Skins"));
-        addButton(new GuiNpcButton(51, this.guiLeft + 310, this.guiTop + 80, 80, 20, "Edit Buttons"));
+        int topOffset = 58;
+        addButton(new GuiNpcButton(46, this.guiLeft + 310, this.guiTop + topOffset, 80, 20, "Reload Skins"));
 
-        addLabel(new GuiNpcLabel(47, "Point of View", this.guiLeft + 270, this.guiTop + 139, 16777215));
-        addButton(new GuiNpcButton(47, this.guiLeft + 350, this.guiTop + 134, 50, 20, new String[]{"gui.no", "gui.yes"}, MorePlayerModels.EnablePOV ? 1 : 0));
+        topOffset += 22;
+        addButton(new GuiNpcButton(51, this.guiLeft + 310, this.guiTop + topOffset, 80, 20, "Edit Buttons"));
 
-        addLabel(new GuiNpcLabel(48, "Chatbubbles", this.guiLeft + 270, this.guiTop + 161, 16777215));
-        addButton(new GuiNpcButton(48, this.guiLeft + 350, this.guiTop + 156, 50, 20, new String[]{"gui.no", "gui.yes"}, MorePlayerModels.EnableChatBubbles ? 1 : 0));
+        topOffset += 22 + 10;
+        addLabel(new GuiNpcLabel(47, "Point of View", this.guiLeft + 270, this.guiTop + topOffset + 5, 16777215));
+        addButton(new GuiNpcButton(47, this.guiLeft + 350, this.guiTop + topOffset, 50, 20, new String[]{"gui.no", "gui.yes"}, MorePlayerModels.EnablePOV ? 1 : 0));
 
-        addLabel(new GuiNpcLabel(49, "BackItem", this.guiLeft + 270, this.guiTop + 183, 16777215));
-        addButton(new GuiNpcButton(49, this.guiLeft + 350, this.guiTop + 178, 50, 20, new String[]{"gui.no", "gui.yes"}, MorePlayerModels.EnableBackItem ? 1 : 0));
+//        addLabel(new GuiNpcLabel(48, "Chatbubbles", this.guiLeft + 270, this.guiTop + 161, 16777215));
+//        addButton(new GuiNpcButton(48, this.guiLeft + 350, this.guiTop + 156, 50, 20, new String[]{"gui.no", "gui.yes"}, MorePlayerModels.EnableChatBubbles ? 1 : 0));
 
-        addLabel(new GuiNpcLabel(50, "Tooltip", this.guiLeft + 270, this.guiTop + 205, 16777215));
-        addButton(new GuiNpcButton(50, this.guiLeft + 350, this.guiTop + 200, 50, 20, new String[]{"gui.no", "1", "2", "3", "4"}, MorePlayerModels.Tooltips));
+        topOffset += 22;
+        addLabel(new GuiNpcLabel(49, "BackItem", this.guiLeft + 270, this.guiTop + topOffset + 5, 16777215));
+        addButton(new GuiNpcButton(49, this.guiLeft + 350, this.guiTop + topOffset, 50, 20, new String[]{"gui.no", "gui.yes"}, MorePlayerModels.EnableBackItem ? 1 : 0));
+
+        topOffset += 22;
+        addLabel(new GuiNpcLabel(50, "Tooltip", this.guiLeft + 270, this.guiTop + topOffset + 5, 16777215));
+        addButton(new GuiNpcButton(50, this.guiLeft + 350, this.guiTop + topOffset, 50, 20, new String[]{"gui.no", "1", "2", "3", "4"}, MorePlayerModels.Tooltips));
 
         if (entity == null) {
             showPlayerButtons();

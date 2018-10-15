@@ -69,7 +69,7 @@ public class ClientEventHandler {
         if (type <= 0)
             return;
         if (MorePlayerModels.HasServerSide) {
-            Client.sendData(EnumPackets.ANIMATION, new Object[]{Integer.valueOf(type)});
+            Client.sendData(EnumPackets.ANIMATION, type);
         } else {
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             EnumAnimation animation = EnumAnimation.values()[type];
@@ -117,7 +117,7 @@ public class ClientEventHandler {
         if ((world != null) && (this.prevWorld != world)) {
             MorePlayerModels.HasServerSide = false;
             ModelData data = PlayerDataController.instance.getPlayerData(mc.thePlayer);
-            Client.sendData(EnumPackets.PING, new Object[]{data.writeToNBT()});
+            Client.sendData(EnumPackets.PING, data.writeToNBT());
             this.prevWorld = world;
         }
         if ((MorePlayerModels.HasServerSide) && (mc.thePlayer != null) && (world != null) && (world.getWorldTime() % 20L == 0L)) {
@@ -127,7 +127,7 @@ public class ClientEventHandler {
 
                         (this.playerlist == null) || (!this.playerlist.contains(player)))) {
                     ModelData data = PlayerDataController.instance.getPlayerData(player);
-                    Client.sendData(EnumPackets.REQUEST_PLAYER_DATA, new Object[]{player.getCommandSenderName(), data.getHash()});
+                    Client.sendData(EnumPackets.REQUEST_PLAYER_DATA, player.getCommandSenderName(), data.getHash());
                 }
             this.playerlist = list;
         }

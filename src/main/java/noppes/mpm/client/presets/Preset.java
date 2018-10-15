@@ -22,6 +22,7 @@ public class Preset {
         preset.name = "Human Female";
         preset.data = data;
         data.breasts = 2;
+        data.soundType = 1;
         data.head.setScale(0.95F, 0.95F);
         data.legs.setScale(0.92F, 0.92F);
         data.arms.setScale(0.8F, 0.92F);
@@ -43,6 +44,7 @@ public class Preset {
         preset.name = "Elf Female";
         preset.data = data;
         data.breasts = 2;
+        data.soundType = 1;
         data.legs.setScale(0.8F, 1.05F);
         data.arms.setScale(0.8F, 1.05F);
         data.body.setScale(0.8F, 1.05F);
@@ -64,6 +66,7 @@ public class Preset {
         preset.name = "Dwarf Female";
         preset.data = data;
         data.breasts = 2;
+        data.soundType = 1;
         data.legs.setScale(0.9F, 0.65F);
         data.arms.setScale(0.9F, 0.65F);
         data.body.setScale(1.0F, 0.65F, 1.1F);
@@ -85,6 +88,7 @@ public class Preset {
         preset.name = "Orc Female";
         preset.data = data;
         data.breasts = 2;
+        data.soundType = 1;
         data.legs.setScale(1.1F, 1.0F);
         data.arms.setScale(1.1F, 1.0F);
         data.body.setScale(1.1F, 1.0F, 1.25F);
@@ -119,6 +123,7 @@ public class Preset {
         tail.setTexture("tail/tail1", 0);
         tail.color = 14263886;
         data.breasts = 2;
+        data.soundType = 1;
         data.head.setScale(0.95F, 0.95F);
         data.legs.setScale(0.92F, 0.92F);
         data.arms.setScale(0.8F, 0.92F);
@@ -154,6 +159,7 @@ public class Preset {
         tail.setTexture("tail/tail2", 0);
         tail.color = 6182997;
         data.breasts = 2;
+        data.soundType = 1;
         data.head.setScale(0.95F, 0.95F);
         data.legs.setScale(0.92F, 0.92F);
         data.arms.setScale(0.8F, 0.92F);

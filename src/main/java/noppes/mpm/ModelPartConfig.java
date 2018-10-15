@@ -23,9 +23,9 @@ public class ModelPartConfig {
     }
 
     public void readFromNBT(NBTTagCompound compound) {
-        this.scaleX = checkValue(compound.getFloat("ScaleX"), 0.5F, 3.0F);
-        this.scaleY = checkValue(compound.getFloat("ScaleY"), 0.5F, 3.0F);
-        this.scaleZ = checkValue(compound.getFloat("ScaleZ"), 0.5F, 3.0F);
+        this.scaleX = checkValue(compound.getFloat("ScaleX"), 0.5F, 2.0F);
+        this.scaleY = checkValue(compound.getFloat("ScaleY"), 0.5F, 2.0F);
+        this.scaleZ = checkValue(compound.getFloat("ScaleZ"), 0.5F, 2.0F);
 
         this.transX = checkValue(compound.getFloat("TransX"), 0.0F, 1.0F);
         this.transY = checkValue(compound.getFloat("TransY"), 0.0F, 1.0F);

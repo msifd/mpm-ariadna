@@ -4,8 +4,8 @@ import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import noppes.mpm.MorePlayerModels;
-import noppes.mpm.server.Server;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.server.Server;
 
 import java.io.IOException;
 

@@ -1,18 +1,12 @@
 package noppes.mpm.client.render;
 
 import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
-import net.minecraft.client.resources.SkinManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,23 +16,19 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import noppes.mpm.ModelData;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.client.ImageBufferDownloadAlt;
+import noppes.mpm.client.SkinLoader;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelMpmNewFormat;
 import noppes.mpm.client.model.ModelRenderPassHelper;
 import noppes.mpm.constants.EnumAnimation;
 import org.lwjgl.opengl.GL11;
 
-import java.io.File;
-import java.util.Map;
 import java.util.UUID;
 
 public class RenderMPM extends RenderPlayer {
@@ -58,8 +48,8 @@ public class RenderMPM extends RenderPlayer {
         this.modelArmorChestplate = new ModelMPM(0.4F);
     }
 
-    public void setModelData(ModelData data, EntityLivingBase entity) {
-        this.data = data;
+    public void setModelData(ModelData newData, EntityLivingBase entity) {
+        data = newData;
 
         if (data.reloadBoxes) {
             this.modelBipedMain.reloadBoxes();
@@ -71,111 +61,35 @@ public class RenderMPM extends RenderPlayer {
         this.modelArmor.setPlayerData(data, entity);
     }
 
+    void checkSkinState(EntityPlayer player) {
+        if (!data.loaded) {
+            if (player.ticksExisted > 20) {
+                data.playerResource = SkinLoader.loadSkin((AbstractClientPlayer) player, data);
+            } else
+                data.playerResource = ((AbstractClientPlayer) player).getLocationSkin();
+        }
+    }
+
+    @Override
     protected void passSpecialRender(EntityLivingBase base, double x, double y, double z) {
-        if ((this.data.isSleeping()) || (this.data.animation == EnumAnimation.CRAWLING)) {
+        if ((data.isSleeping()) || (data.animation == EnumAnimation.CRAWLING)) {
             y -= 1.5D;
-        } else if (this.data != null)
-            y -= this.data.getBodyY();
+        } else if (data != null)
+            y -= data.getBodyY();
         base.isSneaking();
-        if (this.data.animation == EnumAnimation.SITTING)
+        if (data.animation == EnumAnimation.SITTING)
             y -= 0.6D;
         super.passSpecialRender(base, x, y, z);
     }
 
-    /**
-     * @param data pass data for main skin, null otherwise
-     */
-    private void loadPlayerTexture(ModelData data, File file, ResourceLocation resource, String par1Str) {
-        final TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-        final ImageBufferDownloadAlt imageBuffer = new ImageBufferDownloadAlt(data);
-        final ThreadDownloadImageData object = new ThreadDownloadImageData(file, par1Str, SkinManager.field_152793_a, imageBuffer);
-        texturemanager.loadTexture(resource, object);
-    }
-
-    public static File getSkinFileForName(String name) {
-        final SkinManager skinmanager = Minecraft.getMinecraft().func_152342_ad();
-
-        final String skinSubfolder = name.substring(0, 2);
-        final File skinsDir = new File((File) ObfuscationReflectionHelper.getPrivateValue(SkinManager.class, skinmanager, 3), skinSubfolder);
-
-        return new File(skinsDir, name);
-    }
-
-    public ResourceLocation loadResource(AbstractClientPlayer player) {
-        if (this.data.loaded)
-            return this.data.playerResource;
-
-        final Minecraft mc = Minecraft.getMinecraft();
-        final SkinManager skinmanager = mc.func_152342_ad();
-        final GameProfile gp = player.getGameProfile();
-        final Map map = skinmanager.func_152788_a(gp);
-
-        final String url;
-
-        if ((this.data.url != null) && (!this.data.url.isEmpty())) {
-            url = this.data.url;
-        } else {
-            final MinecraftProfileTexture profile_skin = (MinecraftProfileTexture) map.get(MinecraftProfileTexture.Type.SKIN);
-            if (profile_skin == null) {
-                this.data.loaded = true;
-                data.playerResource = player.getLocationSkin();
-                return data.playerResource;
-            } else {
-                url = profile_skin.getUrl();
-            }
-        }
-
-        final File skinFile = getSkinFileForName(gp.getName());
-        if (skinFile.exists())
-            skinFile.delete();
-
-        final ResourceLocation location = new ResourceLocation("skins/" + gp.getName());
-        loadPlayerTexture(data, skinFile, location, url);
-        player.func_152121_a(MinecraftProfileTexture.Type.SKIN, location);
-
-        data.playerResource = location;
-        data.loaded = true;
-        return location;
-    }
-
-    public ResourceLocation loadExtraTexture(AbstractClientPlayer player) {
-        if (data.extraUrl == null || data.extraUrl.isEmpty()) return null;
-        if (data.extraLoaded) return data.playerExtraTexture;
-
-        final Minecraft mc = Minecraft.getMinecraft();
-        final SkinManager skinmanager = mc.func_152342_ad();
-        final GameProfile gp = player.getGameProfile();
-
-        final String fileName = "__extra_" + gp.getName();
-        final File skinsDir = new File((File) ObfuscationReflectionHelper.getPrivateValue(SkinManager.class, skinmanager, 3), gp.getName().substring(0, 2));
-        final File skinFile = new File(skinsDir, fileName);
-        if (skinFile.exists())
-            skinFile.delete();
-
-        final ResourceLocation location = new ResourceLocation("skins/" + fileName);
-        loadPlayerTexture(null, skinFile, location, data.extraUrl);
-
-        data.playerExtraTexture = location;
-        data.extraLoaded = true;
-        return location;
-    }
-
+    @Override
     public void renderFirstPersonArm(EntityPlayer player) {
-        this.data = PlayerDataController.instance.getPlayerData(player);
+        data = PlayerDataController.instance.getPlayerData(player);
 
-        if (!this.data.loaded) {
-            if (player.ticksExisted > 20) {
-                this.data.playerResource = loadResource((AbstractClientPlayer) player);
-            } else
-                this.data.playerResource = ((AbstractClientPlayer) player).getLocationSkin();
-        }
-        if (!data.extraUrl.isEmpty() && !data.extraLoaded && data.loaded) {
-            this.data.playerExtraTexture = loadExtraTexture((AbstractClientPlayer) player);
-        }
-        setModelData(this.data, player);
+        setModelData(data, player);
+        checkSkinState(player);
 
-        float f = 1.0F;
-        GL11.glColor3f(f, f, f);
+        GL11.glColor3f(1, 1, 1);
         modelBipedMain.onGround = 0.0F;
         modelBipedMain.setRotationAngles(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, player);
         modelBipedMain.renderArms(player, 0.0625F, true);
@@ -186,10 +100,10 @@ public class RenderMPM extends RenderPlayer {
 
         if (itemStack != null) {
             GL11.glPushMatrix();
-            float y = (this.data.arms.scaleY - 1.0F) * 0.7F;
+            float y = (data.arms.scaleY - 1.0F) * 0.7F;
 
-            float x = (1.0F - this.data.body.scaleX) * 0.25F + (1.0F - this.data.arms.scaleX) * 0.075F;
-            GL11.glTranslatef(x, this.data.getBodyY(), 0.0F);
+            float x = (1.0F - data.body.scaleX) * 0.25F + (1.0F - data.arms.scaleX) * 0.075F;
+            GL11.glTranslatef(x, data.getBodyY(), 0.0F);
 
             modelBipedMain.bipedRightArm.postRender(0.0625F);
 
@@ -250,7 +164,6 @@ public class RenderMPM extends RenderPlayer {
                 GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
             }
 
-
             if (itemStack.getItem().requiresMultipleRenderPasses()) {
                 for (int k = 0; k <= itemStack.getItem().getRenderPasses(itemStack.getItemDamage()); k++) {
                     int i = itemStack.getItem().getColorFromItemStack(itemStack, k);
@@ -262,7 +175,6 @@ public class RenderMPM extends RenderPlayer {
                 }
             }
 
-
             int k = itemStack.getItem().getColorFromItemStack(itemStack, 0);
             float f11 = (k >> 16 & 0xFF) / 255.0F;
             float f12 = (k >> 8 & 0xFF) / 255.0F;
@@ -270,12 +182,11 @@ public class RenderMPM extends RenderPlayer {
             GL11.glColor4f(f11, f12, f4, 1.0F);
             this.renderManager.itemRenderer.renderItem(player, itemStack, 0);
 
-
             GL11.glPopMatrix();
         }
     }
 
-
+    @Override
     protected void rotateCorpse(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
         EntityPlayer player = (EntityPlayer) par1EntityLiving;
         if (!player.isEntityAlive()) {
@@ -284,33 +195,33 @@ public class RenderMPM extends RenderPlayer {
         }
 
         if (player.ridingEntity != null) {
-            GL11.glTranslatef(0.0F, this.data.getLegsY(), 0.0F);
+            GL11.glTranslatef(0.0F, data.getLegsY(), 0.0F);
         }
 
-        if (this.data.animation == EnumAnimation.SITTING) {
-            GL11.glTranslatef(0.0F, -0.6F + this.data.getLegsY(), 0.0F);
+        if (data.animation == EnumAnimation.SITTING) {
+            GL11.glTranslatef(0.0F, -0.6F + data.getLegsY(), 0.0F);
         }
-        if (this.data.animation == EnumAnimation.SLEEPING_EAST) {
+        if (data.animation == EnumAnimation.SLEEPING_EAST) {
             GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glTranslatef(1.6F + this.data.offsetY(), 0.05F, 0.0F);
+            GL11.glTranslatef(1.6F + data.offsetY(), 0.05F, 0.0F);
             GL11.glRotatef(getDeathMaxRotation(player), 0.0F, 0.0F, 1.0F);
             GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
-        } else if (this.data.animation == EnumAnimation.SLEEPING_NORTH) {
+        } else if (data.animation == EnumAnimation.SLEEPING_NORTH) {
             GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glTranslatef(1.6F + this.data.offsetY(), 0.05F, 0.0F);
+            GL11.glTranslatef(1.6F + data.offsetY(), 0.05F, 0.0F);
             GL11.glRotatef(getDeathMaxRotation(player), 0.0F, 0.0F, 1.0F);
             GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
-        } else if (this.data.animation == EnumAnimation.SLEEPING_WEST) {
+        } else if (data.animation == EnumAnimation.SLEEPING_WEST) {
             GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glTranslatef(1.6F + this.data.offsetY(), 0.05F, 0.0F);
+            GL11.glTranslatef(1.6F + data.offsetY(), 0.05F, 0.0F);
             GL11.glRotatef(getDeathMaxRotation(player), 0.0F, 0.0F, 1.0F);
             GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
-        } else if (this.data.animation == EnumAnimation.SLEEPING_SOUTH) {
+        } else if (data.animation == EnumAnimation.SLEEPING_SOUTH) {
             GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glTranslatef(1.6F + this.data.offsetY(), 0.05F, 0.0F);
+            GL11.glTranslatef(1.6F + data.offsetY(), 0.05F, 0.0F);
             GL11.glRotatef(getDeathMaxRotation(player), 0.0F, 0.0F, 1.0F);
             GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
-        } else if (this.data.animation == EnumAnimation.CRAWLING) {
+        } else if (data.animation == EnumAnimation.CRAWLING) {
             GL11.glTranslatef(0.0F, 0.2F, 0.0F);
             super.rotateCorpse(par1EntityLiving, par2, par3, par4);
             GL11.glTranslatef(0.0F, 0.0F, 1.5F);
@@ -325,11 +236,11 @@ public class RenderMPM extends RenderPlayer {
         if (itemstack == null)
             return;
         GL11.glPushMatrix();
-        GL11.glTranslatef(0.0F, this.data.getBodyY(), 0.0F);
+        GL11.glTranslatef(0.0F, data.getBodyY(), 0.0F);
 
         modelBipedMain.bipedHead.postRender(0.0625F);
 
-        GL11.glScalef(this.data.head.scaleX, this.data.head.scaleY, this.data.head.scaleZ);
+        GL11.glScalef(data.head.scaleX, data.head.scaleY, data.head.scaleZ);
 
         if ((itemstack.getItem() instanceof ItemBlock)) {
             IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemstack, IItemRenderer.ItemRenderType.EQUIPPED);
@@ -365,7 +276,7 @@ public class RenderMPM extends RenderPlayer {
     }
 
     public void renderBackitem(EntityPlayer player) {
-        ItemStack itemstack = this.data.backItem;
+        ItemStack itemstack = data.backItem;
         if ((itemstack == null) || (ItemStack.areItemStacksEqual(itemstack, player.inventory.getCurrentItem())))
             return;
         Block block = null;
@@ -380,12 +291,12 @@ public class RenderMPM extends RenderPlayer {
         entity.rotationYaw = 0.0F;
         entity.setEntityItemStack(itemstack);
 
-        if (this.data.animation == EnumAnimation.DANCING) {
+        if (data.animation == EnumAnimation.DANCING) {
             float dancing = player.ticksExisted / 4.0F;
             GL11.glTranslatef((float) Math.sin(dancing) * 0.015F, 0.0F, 0.0F);
         }
 
-        GL11.glTranslatef(0.0F, this.data.getBodyY(), 0.14299999F * this.data.body.scaleZ);
+        GL11.glTranslatef(0.0F, data.getBodyY(), 0.14299999F * data.body.scaleZ);
 
         modelBipedMain.bipedBody.postRender(0.065F);
 
@@ -429,6 +340,7 @@ public class RenderMPM extends RenderPlayer {
         modelBipedMain.entity = (this.modelArmorChestplate.entity = this.modelArmor.entity = entity);
     }
 
+    @Override
     protected void renderEquippedItems(EntityLivingBase entityliving, float f) {
         if (this.renderEntity != null) {
             MPMRendererHelper.renderEquippedItems(this.entity, f, this.renderEntity);
@@ -437,6 +349,7 @@ public class RenderMPM extends RenderPlayer {
         }
     }
 
+    @Override
     protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3) {
         if (this.renderEntity != null) {
             if (this.renderPassModel != null)
@@ -446,6 +359,7 @@ public class RenderMPM extends RenderPlayer {
         return shouldRenderPass((AbstractClientPlayer) par1EntityLivingBase, par2, par3);
     }
 
+    @Override
     protected void preRenderCallback(EntityLivingBase entityliving, float f) {
         if (this.renderEntity != null) {
             MPMRendererHelper.preRenderCallback(this.entity, f, this.renderEntity);
@@ -454,6 +368,7 @@ public class RenderMPM extends RenderPlayer {
         }
     }
 
+    @Override
     protected float handleRotationFloat(EntityLivingBase par1EntityLivingBase, float par2) {
         if (this.renderEntity != null) {
             return MPMRendererHelper.handleRotationFloat(this.entity, par2, this.renderEntity);
@@ -461,8 +376,9 @@ public class RenderMPM extends RenderPlayer {
         return super.handleRotationFloat(par1EntityLivingBase, par2);
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(AbstractClientPlayer player) {
-        if (this.data.url != null && !this.data.url.isEmpty())
+        if (data.url != null && !data.url.isEmpty())
             return player.getLocationSkin();
         else
             return MPMRendererHelper.getResource(player, this.renderEntity, this.entity);

@@ -1,4 +1,4 @@
-package noppes.mpm.client;
+package noppes.mpm.client.net;
 
 import net.minecraft.client.renderer.ImageBufferDownload;
 import noppes.mpm.ModelData;

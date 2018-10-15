@@ -17,8 +17,6 @@ import noppes.mpm.client.model.part.tails.ModelTailFin;
 import noppes.mpm.constants.EnumAnimation;
 import org.lwjgl.opengl.GL11;
 
-import java.util.stream.Stream;
-
 public class ModelTail extends ModelScaleRenderer {
     public ModelData data;
     private EntityLivingBase entity;

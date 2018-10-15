@@ -4,9 +4,9 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import noppes.mpm.ModelData;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.server.Server;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.server.Server;
 
 public class CommandHug extends MpmCommandInterface {
     public String getCommandName() {

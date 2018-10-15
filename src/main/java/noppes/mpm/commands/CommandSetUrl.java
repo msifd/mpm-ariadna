@@ -5,8 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
 import noppes.mpm.ModelData;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.server.Server;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.server.Server;
 
 public class CommandSetUrl
         extends MpmCommandInterface {

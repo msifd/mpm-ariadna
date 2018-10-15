@@ -85,10 +85,6 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
         addLabel(new GuiNpcLabel(49, "BackItem", this.guiLeft + 270, this.guiTop + topOffset + 5, 16777215));
         addButton(new GuiNpcButton(49, this.guiLeft + 350, this.guiTop + topOffset, 50, 20, new String[]{"gui.no", "gui.yes"}, MorePlayerModels.EnableBackItem ? 1 : 0));
 
-        topOffset += 22;
-        addLabel(new GuiNpcLabel(50, "Tooltip", this.guiLeft + 270, this.guiTop + topOffset + 5, 16777215));
-        addButton(new GuiNpcButton(50, this.guiLeft + 350, this.guiTop + topOffset, 50, 20, new String[]{"gui.no", "1", "2", "3", "4"}, MorePlayerModels.Tooltips));
-
         if (entity == null) {
             showPlayerButtons();
         } else {
@@ -275,10 +271,6 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
         }
         if (button.id == 49) {
             MorePlayerModels.EnableBackItem = button.getValue() == 1;
-            MorePlayerModels.INSTANCE.configLoader.updateConfig();
-        }
-        if (button.id == 50) {
-            MorePlayerModels.Tooltips = button.getValue();
             MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 51) {

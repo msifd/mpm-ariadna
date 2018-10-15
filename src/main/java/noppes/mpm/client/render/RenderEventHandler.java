@@ -15,13 +15,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import noppes.mpm.ModelData;
 import noppes.mpm.MorePlayerModels;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.constants.EnumAnimation;
 import org.lwjgl.opengl.GL11;
 
@@ -32,18 +30,12 @@ public class RenderEventHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void pre(RenderPlayerEvent.Pre event) {
         EntityPlayer player = event.entityPlayer;
-        this.data = PlayerDataController.instance.getPlayerData(player);
-        renderer.setModelData(this.data, player);
+        
+        data = PlayerDataController.instance.getPlayerData(player);
+        renderer.setModelData(data, player);
         setModels(event.renderer);
-        if (!this.data.loaded) {
-            if (player.ticksExisted > 20) {
-                this.data.playerResource = renderer.loadResource((AbstractClientPlayer) player);
-            } else
-                this.data.playerResource = ((AbstractClientPlayer) player).getLocationSkin();
-        }
-        if (!data.extraUrl.isEmpty() && !this.data.extraLoaded && data.loaded) {
-            this.data.playerExtraTexture = renderer.loadExtraTexture((AbstractClientPlayer) player);
-        }
+        
+        renderer.checkSkinState(player);
 
         if (!(event.renderer instanceof RenderMPM)) {
             RenderManager.instance.entityRenderMap.put(EntityPlayer.class, renderer);
@@ -54,14 +46,14 @@ public class RenderEventHandler {
             RenderManager.instance.entityRenderMap.put(AbstractClientPlayer.class, renderer);
         }
 
-        EntityLivingBase entity = this.data.getEntity(player.worldObj, player);
+        EntityLivingBase entity = data.getEntity(player.worldObj, player);
         renderer.setEntity(entity);
         if (player == Minecraft.getMinecraft().thePlayer) {
             player.yOffset = 1.62F;
-            this.data.backItem = player.inventory.mainInventory[0];
+            data.backItem = player.inventory.mainInventory[0];
         }
     }
-
+    
     private void setModels(RenderPlayer render) {
         if (MPMRendererHelper.getMainModel(render) == renderer.modelBipedMain)
             return;
@@ -73,11 +65,11 @@ public class RenderEventHandler {
 
     @SubscribeEvent
     public void special(RenderPlayerEvent.Specials.Pre event) {
-        if (this.data.animation == EnumAnimation.BOW) {
-            float ticks = (event.entityPlayer.ticksExisted - this.data.animationStart) / 10.0F;
+        if (data.animation == EnumAnimation.BOW) {
+            float ticks = (event.entityPlayer.ticksExisted - data.animationStart) / 10.0F;
             if (ticks > 1.0F)
                 ticks = 1.0F;
-            float scale = 2.0F - this.data.body.scaleY;
+            float scale = 2.0F - data.body.scaleY;
             GL11.glTranslatef(0.0F, 12.0F * scale * 0.065F, 0.0F);
             GL11.glRotatef(60.0F * ticks, 1.0F, 0.0F, 0.0F);
             GL11.glTranslatef(0.0F, -12.0F * scale * 0.065F, 0.0F);
@@ -88,44 +80,6 @@ public class RenderEventHandler {
         renderer.renderHelmet(event.entityPlayer);
         if (MorePlayerModels.EnableBackItem)
             renderer.renderBackitem(event.entityPlayer);
-        GL11.glTranslatef(0.0F, this.data.getBodyY(), 0.0F);
-    }
-
-    @SubscribeEvent
-    public void overlay(RenderGameOverlayEvent event) {
-        if (event.type != RenderGameOverlayEvent.ElementType.ALL) {
-            return;
-        }
-        Minecraft mc = Minecraft.getMinecraft();
-        if ((mc.currentScreen != null) || (MorePlayerModels.Tooltips == 0))
-            return;
-        ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-        if (item == null) {
-            return;
-        }
-        String name = item.getDisplayName();
-        int x = event.resolution.getScaledWidth() - mc.fontRenderer.getStringWidth(name);
-
-        int posX = 4;
-        int posY = 4;
-        if (MorePlayerModels.Tooltips % 2 == 0) {
-            posX = x - 4;
-        }
-        if (MorePlayerModels.Tooltips > 2) {
-            posY = event.resolution.getScaledHeight() - 24;
-        }
-        mc.fontRenderer.drawStringWithShadow(name, posX, posY, 16777215);
-        if (item.isItemStackDamageable()) {
-            int max = item.getMaxDamage();
-
-            String dam = max - item.getItemDamage() + "/" + max;
-
-            x = event.resolution.getScaledWidth() - mc.fontRenderer.getStringWidth(dam);
-
-            if ((MorePlayerModels.Tooltips == 2) || (MorePlayerModels.Tooltips == 4)) {
-                posX = x - 4;
-            }
-            mc.fontRenderer.drawStringWithShadow(dam, posX, posY + 12, 16777215);
-        }
+        GL11.glTranslatef(0.0F, data.getBodyY(), 0.0F);
     }
 }

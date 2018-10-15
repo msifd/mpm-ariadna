@@ -16,7 +16,7 @@ import noppes.mpm.MorePlayerModels;
 import noppes.mpm.client.net.PacketHandlerClient;
 import noppes.mpm.client.presets.PresetController;
 import noppes.mpm.client.render.RenderEventHandler;
-
+import org.lwjgl.input.Keyboard;
 
 public class ClientProxy extends CommonProxy {
     public static KeyBinding Screen;
@@ -32,8 +32,7 @@ public class ClientProxy extends CommonProxy {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
         try {
             texturemanager.bindTexture(location);
-        } catch (ReportedException ex) {
-        } catch (NullPointerException e) {
+        } catch (ReportedException | NullPointerException ex) {
         }
     }
 
@@ -45,16 +44,14 @@ public class ClientProxy extends CommonProxy {
         MorePlayerModels.CHANNEL.register(new PacketHandlerClient());
         new PresetController(MorePlayerModels.INSTANCE.dir);
 
-        ClientRegistry.registerKeyBinding(Screen = new KeyBinding("CharacterScreen", 88, "key.categories.gameplay"));
+        ClientRegistry.registerKeyBinding(Screen = new KeyBinding("CharacterScreen", Keyboard.KEY_INSERT, "key.categories.gameplay"));
         ClientRegistry.registerKeyBinding(Sleep = new KeyBinding("MPM 1", 44, "key.categories.gameplay"));
         ClientRegistry.registerKeyBinding(Sit = new KeyBinding("MPM 2", 45, "key.categories.gameplay"));
         ClientRegistry.registerKeyBinding(Dance = new KeyBinding("MPM 3", 46, "key.categories.gameplay"));
         ClientRegistry.registerKeyBinding(Hug = new KeyBinding("MPM 4", 47, "key.categories.gameplay"));
         ClientRegistry.registerKeyBinding(Crawl = new KeyBinding("MPM 5", 48, "key.categories.gameplay"));
 
-
         RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, RenderEventHandler.renderer);
-
 
         FMLCommonHandler.instance().bus().register(new ClientEventHandler());
         MinecraftForge.EVENT_BUS.register(new RenderEventHandler());

@@ -4,9 +4,9 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
-import noppes.mpm.client.ClientProxy;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
+import noppes.mpm.client.MpmClientProxy;
 import org.lwjgl.opengl.GL11;
 
 public abstract class ModelPartInterface
@@ -50,10 +50,10 @@ public abstract class ModelPartInterface
             return;
         if (!this.base.isArmor) {
             if (this.location != null) {
-                ClientProxy.bindTexture(this.location);
+                MpmClientProxy.bindTexture(this.location);
                 this.base.currentlyPlayerTexture = false;
             } else if (!this.base.currentlyPlayerTexture) {
-                ClientProxy.bindTexture(this.data.playerResource);
+                MpmClientProxy.bindTexture(this.data.playerResource);
                 this.base.currentlyPlayerTexture = true;
             }
         }

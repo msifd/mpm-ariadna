@@ -16,6 +16,7 @@ import noppes.mpm.commands.*;
 import noppes.mpm.config.ConfigLoader;
 import noppes.mpm.config.ConfigProp;
 import noppes.mpm.constants.EnumAnimation;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.server.ServerEventHandler;
 import noppes.mpm.server.ServerTickHandler;
 
@@ -27,8 +28,8 @@ public class MorePlayerModels {
     @ConfigProp
     public static int Tooltips = 2;
 
-    @SidedProxy(clientSide = "noppes.mpm.client.ClientProxy", serverSide = "noppes.mpm.CommonProxy")
-    public static CommonProxy PROXY;
+    @SidedProxy(clientSide = "noppes.mpm.client.MpmClientProxy", serverSide = "noppes.mpm.MpmCommonProxy")
+    public static MpmCommonProxy PROXY;
 
     @Mod.Instance
     public static MorePlayerModels INSTANCE;
@@ -83,8 +84,6 @@ public class MorePlayerModels {
             EnablePOV = false;
         }
         PROXY.load();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, PROXY);
-
 
         MinecraftForge.EVENT_BUS.register(new ServerEventHandler());
         FMLCommonHandler.instance().bus().register(new ServerTickHandler());

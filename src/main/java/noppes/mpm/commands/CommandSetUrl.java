@@ -3,8 +3,8 @@ package noppes.mpm.commands;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
-import noppes.mpm.ModelData;
-import noppes.mpm.PlayerDataController;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.constants.EnumPackets;
 import noppes.mpm.server.Server;
 

@@ -1,4 +1,4 @@
-package noppes.mpm;
+package noppes.mpm.data;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -8,7 +8,6 @@ import noppes.mpm.utils.LogWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 
 public class PlayerDataController {
     public static PlayerDataController instance;

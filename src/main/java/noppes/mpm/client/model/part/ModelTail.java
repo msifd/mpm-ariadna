@@ -5,9 +5,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
-import noppes.mpm.client.ClientProxy;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
+import noppes.mpm.client.MpmClientProxy;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelScaleRenderer;
 import noppes.mpm.client.model.part.tails.ModelDragonTail;
@@ -139,10 +139,10 @@ public class ModelTail extends ModelScaleRenderer {
             return;
         if (!this.base.isArmor) {
             if (this.location != null) {
-                ClientProxy.bindTexture(this.location);
+                MpmClientProxy.bindTexture(this.location);
                 this.base.currentlyPlayerTexture = false;
             } else if (!this.base.currentlyPlayerTexture) {
-                ClientProxy.bindTexture(this.data.playerResource);
+                MpmClientProxy.bindTexture(this.data.playerResource);
                 this.base.currentlyPlayerTexture = true;
             }
         }

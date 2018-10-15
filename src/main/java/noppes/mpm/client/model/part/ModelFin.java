@@ -1,7 +1,7 @@
 package noppes.mpm.client.model.part;
 
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.model.Model2DRenderer;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelPartInterface;

@@ -2,8 +2,8 @@ package noppes.mpm.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartConfig;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartConfig;
 import noppes.mpm.client.gui.util.GuiModelInterface;
 import noppes.mpm.client.gui.util.GuiNpcButton;
 import noppes.mpm.client.gui.util.GuiNpcLabel;

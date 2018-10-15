@@ -1,4 +1,4 @@
-package noppes.mpm;
+package noppes.mpm.data;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -8,7 +8,6 @@ public class ModelPartData {
     public String texture;
     public byte type = 0;
     public boolean playerTexture;
-    public boolean extraTexture;
     private ResourceLocation location;
 
     public ModelPartData() {
@@ -18,7 +17,6 @@ public class ModelPartData {
     public ModelPartData(String texture) {
         this.texture = texture;
         this.playerTexture = false;
-        this.extraTexture = false;
     }
 
     public NBTTagCompound writeToNBT() {
@@ -28,7 +26,6 @@ public class ModelPartData {
         if ((this.texture != null) && (!this.texture.isEmpty()))
             compound.setString("Texture", this.texture);
         compound.setBoolean("PlayerTexture", this.playerTexture);
-        compound.setBoolean("ExtraTexture", this.extraTexture);
         return compound;
     }
 
@@ -37,7 +34,6 @@ public class ModelPartData {
         this.color = compound.getInteger("Color");
         this.texture = compound.getString("Texture");
         this.playerTexture = compound.getBoolean("PlayerTexture");
-        this.extraTexture = compound.getBoolean("ExtraTexture");
         this.location = null;
     }
 

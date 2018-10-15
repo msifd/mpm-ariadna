@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import noppes.mpm.ModelData;
+import noppes.mpm.data.ModelData;
 import noppes.mpm.client.gui.util.GuiListActionListener;
 import noppes.mpm.client.gui.util.GuiNPCStringSlot;
 import org.lwjgl.opengl.GL11;

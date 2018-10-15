@@ -1,7 +1,7 @@
 package noppes.mpm.client.net;
 
 import net.minecraft.client.renderer.ImageBufferDownload;
-import noppes.mpm.ModelData;
+import noppes.mpm.data.ModelData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

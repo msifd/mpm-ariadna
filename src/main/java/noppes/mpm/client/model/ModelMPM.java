@@ -6,10 +6,10 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartConfig;
-import noppes.mpm.ModelPartData;
-import noppes.mpm.client.ClientProxy;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartConfig;
+import noppes.mpm.data.ModelPartData;
+import noppes.mpm.client.MpmClientProxy;
 import noppes.mpm.client.animation.AniCrawling;
 import noppes.mpm.client.animation.AniHug;
 import noppes.mpm.client.model.part.*;
@@ -258,7 +258,7 @@ public class ModelMPM extends ModelBiped {
 
     public void loadPlayerTexture() {
         if (!this.isArmor && !this.currentlyPlayerTexture) {
-            ClientProxy.bindTexture(this.data.playerResource);
+            MpmClientProxy.bindTexture(this.data.playerResource);
             this.currentlyPlayerTexture = true;
         }
     }

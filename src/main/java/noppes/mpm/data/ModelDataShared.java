@@ -1,4 +1,4 @@
-package noppes.mpm;
+package noppes.mpm.data;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;

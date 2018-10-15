@@ -4,8 +4,8 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.ModelPartData;
-import noppes.mpm.client.ClientProxy;
+import noppes.mpm.data.ModelPartData;
+import noppes.mpm.client.MpmClientProxy;
 import org.lwjgl.opengl.GL11;
 
 public class EntityEnderFX extends EntityPortalFX {
@@ -58,7 +58,7 @@ public class EntityEnderFX extends EntityPortalFX {
         scale = 1.0F - scale;
         this.particleScale = (this.portalParticleScale * scale);
 
-        ClientProxy.bindTexture(this.location);
+        MpmClientProxy.bindTexture(this.location);
 
         float f = 0.875F;
         float f1 = f + 0.125F;
@@ -80,7 +80,7 @@ public class EntityEnderFX extends EntityPortalFX {
         par1Tessellator.addVertexWithUV(f5 + par3 * f4 - par6 * f4, f6 - par4 * f4, f7 + par5 * f4 - par7 * f4, f, f3);
 
         tessellator.draw();
-        ClientProxy.bindTexture(resource);
+        MpmClientProxy.bindTexture(resource);
         tessellator.startDrawingQuads();
     }
 

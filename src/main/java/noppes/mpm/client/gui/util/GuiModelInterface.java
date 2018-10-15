@@ -8,8 +8,8 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
-import noppes.mpm.ModelData;
-import noppes.mpm.PlayerDataController;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 

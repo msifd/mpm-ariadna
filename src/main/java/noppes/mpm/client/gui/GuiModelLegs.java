@@ -1,7 +1,7 @@
 package noppes.mpm.client.gui;
 
 import net.minecraft.client.gui.GuiScreen;
-import noppes.mpm.ModelPartData;
+import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.gui.util.GuiModelInterface;
 import noppes.mpm.client.gui.util.GuiNpcButton;
 import org.lwjgl.input.Keyboard;
@@ -9,8 +9,7 @@ import org.lwjgl.input.Keyboard;
 public class GuiModelLegs extends GuiModelInterface {
     private final String[] arrLegs = {"gui.no", "Player", "Player Naga", "Spider", "Horse", "Naga", "Mermaid", "Digitigrade"};
     private final String[] arrTail = {
-            "gui.no", "Player", "Player Dragon", "Cat", "Wolf", "Horse", "Dragon", "Squirrel", "Fin", "Rodent",
-            "Cteno", "Fluffy"};
+            "gui.no", "Player", "Player Dragon", "Cat", "Wolf", "Horse", "Dragon", "Squirrel", "Fin", "Rodent"};
     private GuiScreen parent;
 
     public GuiModelLegs(GuiScreen parent) {
@@ -35,7 +34,6 @@ public class GuiModelLegs extends GuiModelInterface {
         addButton(new GuiNpcButton(2, this.guiLeft + 50, y, 70, 20, this.arrTail, getTailIndex(tail)));
         addLabel(new noppes.mpm.client.gui.util.GuiNpcLabel(2, "Tail", this.guiLeft, y + 5, 16777215));
         if (tail != null) {
-            tail.extraTexture = tail.type >= 6; // Extra parts: Cteno, Fluffy
             addButton(new GuiNpcButton(12, this.guiLeft + 122, y, 40, 20, tail.getColor()));
         }
     }

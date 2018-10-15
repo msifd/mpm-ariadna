@@ -2,8 +2,8 @@ package noppes.mpm.client.model.part;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelPartInterface;
 import noppes.mpm.client.model.part.horns.ModelAntennasFront;

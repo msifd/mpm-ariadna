@@ -12,10 +12,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import noppes.mpm.MorePlayerModels;
-import noppes.mpm.PlayerDataController;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.client.fx.EntityEnderFX;
 import noppes.mpm.client.gui.GuiCreationScreen;
 import noppes.mpm.client.render.EntityRendererAlt;
@@ -38,7 +38,7 @@ public class ClientEventHandler {
         Minecraft mc = Minecraft.getMinecraft();
         if ((mc == null) || (mc.thePlayer == null))
             return;
-        if (ClientProxy.Screen.isPressed()) {
+        if (MpmClientProxy.Screen.isPressed()) {
             ModelData data = PlayerDataController.instance.getPlayerData(mc.thePlayer);
             data.animation = EnumAnimation.NONE;
             if (mc.currentScreen == null) {
@@ -48,19 +48,19 @@ public class ClientEventHandler {
         }
         if (!mc.inGameHasFocus)
             return;
-        if (ClientProxy.Sleep.isPressed()) {
+        if (MpmClientProxy.Sleep.isPressed()) {
             processAnimation(MorePlayerModels.button1);
         }
-        if (ClientProxy.Sit.isPressed()) {
+        if (MpmClientProxy.Sit.isPressed()) {
             processAnimation(MorePlayerModels.button2);
         }
-        if (ClientProxy.Dance.isPressed()) {
+        if (MpmClientProxy.Dance.isPressed()) {
             processAnimation(MorePlayerModels.button3);
         }
-        if (ClientProxy.Hug.isPressed()) {
+        if (MpmClientProxy.Hug.isPressed()) {
             processAnimation(MorePlayerModels.button4);
         }
-        if (ClientProxy.Crawl.isPressed()) {
+        if (MpmClientProxy.Crawl.isPressed()) {
             processAnimation(MorePlayerModels.button5);
         }
     }

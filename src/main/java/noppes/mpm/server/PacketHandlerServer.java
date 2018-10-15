@@ -1,4 +1,4 @@
-package noppes.mpm;
+package noppes.mpm.server;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
@@ -8,9 +8,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
-import noppes.mpm.server.Server;
+import noppes.mpm.data.ModelData;
 
 public class PacketHandlerServer {
     @SubscribeEvent

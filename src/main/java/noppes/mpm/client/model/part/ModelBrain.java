@@ -2,8 +2,8 @@ package noppes.mpm.client.model.part;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.ModelData;
-import noppes.mpm.client.ClientProxy;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.client.MpmClientProxy;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelScaleRenderer;
 
@@ -25,7 +25,7 @@ public class ModelBrain extends ModelScaleRenderer {
 
     @Override
     public void render(float par1) {
-        ClientProxy.bindTexture(texture);
+        MpmClientProxy.bindTexture(texture);
         base.currentlyPlayerTexture = false;
         super.render(par1);
     }

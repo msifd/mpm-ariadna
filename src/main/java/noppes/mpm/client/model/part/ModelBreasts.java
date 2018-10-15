@@ -1,7 +1,7 @@
 package noppes.mpm.client.model.part;
 
 import net.minecraft.client.model.ModelRenderer;
-import noppes.mpm.ModelData;
+import noppes.mpm.data.ModelData;
 import noppes.mpm.client.model.Model2DRenderer;
 import noppes.mpm.client.model.ModelMPM;
 

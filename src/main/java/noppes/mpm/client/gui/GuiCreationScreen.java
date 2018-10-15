@@ -11,10 +11,10 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import noppes.mpm.MorePlayerModels;
-import noppes.mpm.PlayerDataController;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.client.gui.util.*;
 import noppes.mpm.constants.EnumPackets;
 import org.lwjgl.input.Keyboard;
@@ -98,15 +98,6 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
             int y = this.guiTop + 173;
             addLabel(new GuiNpcLabel(52, "Skin Url", this.guiLeft, y, 16777215));
             addTextField(new GuiNpcTextField(52, this, this.guiLeft, y + 10, 160, 20, this.playerdata.url));
-
-            // Premiums with extra texture
-            if (entity == null) {
-                final ModelPartData tail = this.playerdata.getPartData("tail");
-                if (tail != null && tail.extraTexture) { // Or any other
-                    y += 32;
-                    addTextField(new GuiNpcTextField(53, this, this.guiLeft, y, 160, 20, this.playerdata.extraUrl));
-                }
-            }
         }
     }
 

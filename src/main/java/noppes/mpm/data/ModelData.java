@@ -1,4 +1,4 @@
-package noppes.mpm;
+package noppes.mpm.data;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import noppes.mpm.MorePlayerModels;
 import noppes.mpm.constants.EnumAnimation;
 
 import javax.xml.bind.DatatypeConverter;

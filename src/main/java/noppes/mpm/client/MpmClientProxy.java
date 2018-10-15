@@ -9,16 +9,15 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import noppes.mpm.CommonProxy;
 import noppes.mpm.MorePlayerModels;
+import noppes.mpm.MpmCommonProxy;
 import noppes.mpm.client.net.PacketHandlerClient;
 import noppes.mpm.client.presets.PresetController;
 import noppes.mpm.client.render.RenderEventHandler;
 import org.lwjgl.input.Keyboard;
 
-public class ClientProxy extends CommonProxy {
+public class MpmClientProxy extends MpmCommonProxy {
     public static KeyBinding Screen;
     public static KeyBinding Sleep;
     public static KeyBinding Sit;
@@ -34,10 +33,6 @@ public class ClientProxy extends CommonProxy {
             texturemanager.bindTexture(location);
         } catch (ReportedException | NullPointerException ex) {
         }
-    }
-
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
     }
 
     public void load() {

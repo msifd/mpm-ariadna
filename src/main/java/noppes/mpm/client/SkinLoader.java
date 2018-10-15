@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.SkinManager;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.ModelData;
+import noppes.mpm.data.ModelData;
 import noppes.mpm.client.net.ImageBufferDownloadAlt;
 
 import java.io.File;

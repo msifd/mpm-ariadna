@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import noppes.mpm.ModelData;
-import noppes.mpm.PlayerDataController;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
 

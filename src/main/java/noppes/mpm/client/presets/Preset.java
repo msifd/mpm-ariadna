@@ -1,8 +1,8 @@
 package noppes.mpm.client.presets;
 
 import net.minecraft.nbt.NBTTagCompound;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 
 import java.util.HashMap;
 

@@ -1,8 +1,8 @@
 package noppes.mpm.client.model.part;
 
 import net.minecraft.client.model.ModelRenderer;
-import noppes.mpm.ModelData;
-import noppes.mpm.ModelPartData;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.model.Model2DRenderer;
 
 public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {

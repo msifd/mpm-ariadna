@@ -14,12 +14,10 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import noppes.mpm.ModelData;
+import noppes.mpm.data.ModelData;
 import noppes.mpm.MorePlayerModels;
-import noppes.mpm.PlayerDataController;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.constants.EnumAnimation;
 import org.lwjgl.opengl.GL11;
 

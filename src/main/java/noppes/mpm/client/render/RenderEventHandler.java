@@ -63,13 +63,12 @@ public class RenderEventHandler {
     }
 
     private void setModels(RenderPlayer render) {
-        ModelMPM playerModel = renderer.modelBipedMainNewFormat;
-        if (MPMRendererHelper.getMainModel(render) == playerModel)
+        if (MPMRendererHelper.getMainModel(render) == renderer.modelBipedMain)
             return;
-        ReflectionHelper.setPrivateValue(RenderPlayer.class, render, playerModel, 1);
+        ReflectionHelper.setPrivateValue(RenderPlayer.class, render, renderer.modelBipedMain, 1);
         ReflectionHelper.setPrivateValue(RenderPlayer.class, render, renderer.modelArmorChestplate, 2);
         ReflectionHelper.setPrivateValue(RenderPlayer.class, render, renderer.modelArmor, 3);
-        MPMRendererHelper.setMainModel(render, playerModel);
+        MPMRendererHelper.setMainModel(render, renderer.modelBipedMain);
     }
 
     @SubscribeEvent

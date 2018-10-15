@@ -16,7 +16,6 @@ import noppes.mpm.ModelData;
 import noppes.mpm.ModelPartData;
 import noppes.mpm.MorePlayerModels;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.client.MCALibrary.animation.AnimationHandler;
 import noppes.mpm.client.fx.EntityEnderFX;
 import noppes.mpm.client.gui.GuiCreationScreen;
 import noppes.mpm.constants.EnumAnimation;
@@ -107,9 +106,6 @@ public class ClientEventHandler {
         } else if ((this.prevAlt != null) && (mc.entityRenderer != this.prevAlt)) {
             mc.entityRenderer = this.prevAlt;
         }
-
-        // MCA Animations
-        AnimationHandler.animTickHandler.onRenderTick(event);
     }
 
     @SubscribeEvent

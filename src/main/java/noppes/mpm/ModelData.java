@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import noppes.mpm.client.animation.MPMAnimationHandler;
 import noppes.mpm.constants.EnumAnimation;
 
 import javax.xml.bind.DatatypeConverter;
@@ -22,7 +21,6 @@ public class ModelData extends ModelDataShared implements IExtendedEntityPropert
     public boolean extraLoaded = false;
     public boolean reloadBoxes = false;
 
-    public MPMAnimationHandler animationHandler = new MPMAnimationHandler(this);
     public ResourceLocation playerResource;
     public ResourceLocation playerExtraTexture;
 

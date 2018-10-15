@@ -8,16 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import noppes.mpm.ModelData;
 import noppes.mpm.ModelPartData;
 import noppes.mpm.client.ClientProxy;
-import noppes.mpm.client.MCALibrary.animation.AnimationHandler;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelScaleRenderer;
-import noppes.mpm.client.model.extrapart.ctenotail.ChannelCtenoIdle;
-import noppes.mpm.client.model.extrapart.ctenotail.ChannelCtenoLowered;
-import noppes.mpm.client.model.extrapart.ctenotail.ChannelCtenoSit;
-import noppes.mpm.client.model.extrapart.ctenotail.ModelCtenoTail;
-import noppes.mpm.client.model.extrapart.flufftail.ChannelFluffyLie;
-import noppes.mpm.client.model.extrapart.flufftail.ChannelFluffySit;
-import noppes.mpm.client.model.extrapart.flufftail.ModelFluffyTail;
 import noppes.mpm.client.model.part.tails.ModelDragonTail;
 import noppes.mpm.client.model.part.tails.ModelRodentTail;
 import noppes.mpm.client.model.part.tails.ModelSquirrelTail;
@@ -38,9 +30,6 @@ public class ModelTail extends ModelScaleRenderer {
     private ModelRenderer horse;
     private ModelRenderer fin;
     private ModelRenderer rodent;
-
-    private ModelCtenoTail cteno;
-    private ModelFluffyTail fluffy;
 
     private int color = 16777215;
 
@@ -81,8 +70,6 @@ public class ModelTail extends ModelScaleRenderer {
         addChild(this.squirrel = new ModelSquirrelTail(base));
         addChild(this.fin = new ModelTailFin(base));
         addChild(this.rodent = new ModelRodentTail(base));
-        addChild(this.cteno = new ModelCtenoTail(base));
-        addChild(this.fluffy = new ModelFluffyTail(base));
     }
 
     public void setData(ModelData data, EntityLivingBase entity) {
@@ -92,14 +79,7 @@ public class ModelTail extends ModelScaleRenderer {
     }
 
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
-        // Special Cteno idle wiggle
-        if (!cteno.isHidden) {
-            AnimationHandler.performAnimationInModel(cteno.parts, data.animationHandler);
-        } else if (!fluffy.isHidden) {
-            AnimationHandler.performAnimationInModel(fluffy.parts, data.animationHandler);
-        } else {
-            this.rotateAngleX = (MathHelper.sin(par3 * 0.067F) * 0.05F); // Idle vert wiggle
-        }
+        this.rotateAngleX = (MathHelper.sin(par3 * 0.067F) * 0.05F); // Idle vert wiggle
         this.rotateAngleY = (MathHelper.cos(par1 * 0.6662F) * 0.2F * par2); // Walking wiggle
 
         if (this.data.animation == EnumAnimation.WAG) {
@@ -146,8 +126,6 @@ public class ModelTail extends ModelScaleRenderer {
         squirrel.isHidden = (config.type != 3);
         fin.isHidden = (config.type != 4);
         rodent.isHidden = (config.type != 5);
-        cteno.isHidden = (config.type != 6);
-        fluffy.isHidden = (config.type != 7);
 
         if (config.type > 5) { // Premium extra parts gets extra texture
             this.location = data.playerExtraTexture;
@@ -155,23 +133,6 @@ public class ModelTail extends ModelScaleRenderer {
             this.location = config.getResource();
         } else {
             this.location = null;
-        }
-
-        if (!cteno.isHidden) {
-            final String anim = ModelCtenoTail.getAnimation(data.animation);
-            Stream.of(ChannelCtenoIdle.ANIM_NAME, ChannelCtenoLowered.ANIM_NAME, ChannelCtenoSit.ANIM_NAME)
-                .filter(s -> !s.equals(anim))
-                .forEach(data.animationHandler::stopAnimation);
-
-            data.animationHandler.keepAnimation(anim, 0);
-        }
-        if (!fluffy.isHidden) {
-            final String anim = ModelFluffyTail.getAnimation(data.animation);
-            Stream.of(ChannelFluffySit.ANIM_NAME, ChannelFluffyLie.ANIM_NAME)
-                    .filter(s -> !s.equals(anim))
-                    .forEach(data.animationHandler::stopAnimation);
-            if (anim != null)
-                data.animationHandler.keepAnimation(anim, 0);
         }
     }
 
@@ -194,11 +155,6 @@ public class ModelTail extends ModelScaleRenderer {
             float blue = (this.color & 0xFF) / 255.0F;
             GL11.glColor4f(red, green, blue, 1.0F);
         }
-
-        if (!cteno.isHidden)
-            AnimationHandler.performAnimationInModel(cteno.parts, data.animationHandler);
-        if (!fluffy.isHidden)
-            AnimationHandler.performAnimationInModel(fluffy.parts, data.animationHandler);
 
         super.render(par1);
 

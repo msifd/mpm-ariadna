@@ -1,4 +1,4 @@
-package noppes.mpm.client;
+package noppes.mpm.client.presets;
 
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.mpm.ModelData;

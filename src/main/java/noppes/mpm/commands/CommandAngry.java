@@ -2,7 +2,7 @@ package noppes.mpm.commands;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import noppes.mpm.Server;
+import noppes.mpm.server.Server;
 import noppes.mpm.constants.EnumPackets;
 
 public class CommandAngry extends MpmCommandInterface {

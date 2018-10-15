@@ -15,7 +15,6 @@ import noppes.mpm.ModelData;
 import noppes.mpm.ModelPartData;
 import noppes.mpm.MorePlayerModels;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.client.EntityFakeLiving;
 import noppes.mpm.client.gui.util.*;
 import noppes.mpm.constants.EnumPackets;
 import org.lwjgl.input.Keyboard;
@@ -262,19 +261,19 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
 
         if (button.id == 47) {
             MorePlayerModels.EnablePOV = button.getValue() == 1;
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 48) {
             MorePlayerModels.EnableChatBubbles = button.getValue() == 1;
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 49) {
             MorePlayerModels.EnableBackItem = button.getValue() == 1;
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 50) {
             MorePlayerModels.Tooltips = button.getValue();
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 51) {
             this.mc.displayGuiScreen(new GuiEditButtons(this));
@@ -309,6 +308,12 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
         else if (guiNpcTextField.id == 53) {
             playerdata.extraUrl = guiNpcTextField.getText();
             playerdata.extraLoaded = false;
+        }
+    }
+
+    private static class EntityFakeLiving extends EntityLiving {
+        EntityFakeLiving(World world) {
+            super(world);
         }
     }
 }

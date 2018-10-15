@@ -1,4 +1,4 @@
-package noppes.mpm.client;
+package noppes.mpm.client.render;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -25,9 +25,8 @@ import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.constants.EnumAnimation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderEvent {
+public class RenderEventHandler {
     public static RenderMPM renderer = new RenderMPM();
-
     private ModelData data;
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -35,7 +34,7 @@ public class RenderEvent {
         EntityPlayer player = event.entityPlayer;
         this.data = PlayerDataController.instance.getPlayerData(player);
         renderer.setModelData(this.data, player);
-        setModels(event.renderer, this.data.newSkinFormat);
+        setModels(event.renderer);
         if (!this.data.loaded) {
             if (player.ticksExisted > 20) {
                 this.data.playerResource = renderer.loadResource((AbstractClientPlayer) player);
@@ -63,8 +62,8 @@ public class RenderEvent {
         }
     }
 
-    private void setModels(RenderPlayer render, boolean newFormat) {
-        ModelMPM playerModel = data.newSkinFormat ? renderer.modelBipedMainNewFormat : renderer.modelBipedMain;
+    private void setModels(RenderPlayer render) {
+        ModelMPM playerModel = renderer.modelBipedMainNewFormat;
         if (MPMRendererHelper.getMainModel(render) == playerModel)
             return;
         ReflectionHelper.setPrivateValue(RenderPlayer.class, render, playerModel, 1);
@@ -91,17 +90,6 @@ public class RenderEvent {
         if (MorePlayerModels.EnableBackItem)
             renderer.renderBackitem(event.entityPlayer);
         GL11.glTranslatef(0.0F, this.data.getBodyY(), 0.0F);
-    }
-
-    @SubscribeEvent
-    public void chat(ClientChatReceivedEvent event) {
-        if (MorePlayerModels.HasServerSide)
-            return;
-        try {
-            ChatMessages.parseMessage(event.message.getFormattedText());
-        } catch (Exception ex) {
-            System.out.println("Cant handle chatmessage: " + event.message + ":" + ex.getMessage());
-        }
     }
 
     @SubscribeEvent

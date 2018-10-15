@@ -3,6 +3,7 @@ package noppes.mpm;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import noppes.mpm.utils.LogWriter;
 
 import java.io.File;
 import java.io.FileInputStream;

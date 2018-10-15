@@ -1,4 +1,4 @@
-package noppes.mpm.client;
+package noppes.mpm.client.render;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
@@ -30,6 +30,7 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import noppes.mpm.ModelData;
 import noppes.mpm.PlayerDataController;
+import noppes.mpm.client.ImageBufferDownloadAlt;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelMpmNewFormat;
 import noppes.mpm.client.model.ModelRenderPassHelper;
@@ -53,7 +54,7 @@ public class RenderMPM extends RenderPlayer {
 
     public RenderMPM() {
         setRenderManager(RenderManager.instance);
-        this.modelBipedMain = new ModelMPM(0.0F);
+        this.modelBipedMain = new ModelMpmNewFormat();
         this.modelBipedMainNewFormat = new ModelMpmNewFormat();
         this.modelArmor = new ModelMPM(0.3F);
         this.modelArmorChestplate = new ModelMPM(0.4F);
@@ -90,9 +91,6 @@ public class RenderMPM extends RenderPlayer {
         if (scoreobjective != null) {
             y += 0.3D;
         }
-
-        if (func_110813_b(base))
-            ChatMessages.getChatMessages(player.getCommandSenderName()).renderMessages(x, y + 0.7D + player.height, z);
     }
 
     /**
@@ -146,7 +144,6 @@ public class RenderMPM extends RenderPlayer {
         loadPlayerTexture(data, skinFile, location, url);
         player.func_152121_a(MinecraftProfileTexture.Type.SKIN, location);
 
-        data.newSkinFormat = false; // Temporary, until skin is not loaded in other thread
         data.playerResource = location;
         data.loaded = true;
         return location;
@@ -188,7 +185,7 @@ public class RenderMPM extends RenderPlayer {
         }
         setModelData(this.data, player);
 
-        ModelMPM playerModel = data.newSkinFormat ? modelBipedMainNewFormat : modelBipedMain;
+        ModelMPM playerModel = modelBipedMainNewFormat;
 
         float f = 1.0F;
         GL11.glColor3f(f, f, f);
@@ -197,57 +194,57 @@ public class RenderMPM extends RenderPlayer {
         playerModel.renderArms(player, 0.0625F, true);
     }
 
-    public void renderItem(EntityPlayer par1AbstractClientPlayer) {
-        ItemStack itemstack1 = par1AbstractClientPlayer.inventory.getCurrentItem();
+    public void renderItem(EntityPlayer player) {
+        ItemStack itemStack = player.inventory.getCurrentItem();
 
-        if (itemstack1 != null) {
+        if (itemStack != null) {
             GL11.glPushMatrix();
             float y = (this.data.arms.scaleY - 1.0F) * 0.7F;
 
             float x = (1.0F - this.data.body.scaleX) * 0.25F + (1.0F - this.data.arms.scaleX) * 0.075F;
             GL11.glTranslatef(x, this.data.getBodyY(), 0.0F);
 
-            ModelMPM playerModel = data.newSkinFormat ? modelBipedMainNewFormat : modelBipedMain;
+            ModelMPM playerModel = modelBipedMainNewFormat;
             playerModel.bipedRightArm.postRender(0.0625F);
 
             GL11.glTranslatef(-0.0625F, 0.4375F + y, 0.0625F);
 
-            if (par1AbstractClientPlayer.fishEntity != null) {
-                itemstack1 = new ItemStack(Items.stick);
+            if (player.fishEntity != null) {
+                itemStack = new ItemStack(Items.stick);
             }
 
             EnumAction enumaction = null;
 
-            if (par1AbstractClientPlayer.getItemInUseCount() > 0) {
-                enumaction = itemstack1.getItemUseAction();
+            if (player.getItemInUseCount() > 0) {
+                enumaction = itemStack.getItemUseAction();
             }
 
-            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemstack1, IItemRenderer.ItemRenderType.EQUIPPED);
-            boolean is3D = (customRenderer != null) && (customRenderer.shouldUseRenderHelper(IItemRenderer.ItemRenderType.EQUIPPED, itemstack1, IItemRenderer.ItemRendererHelper.BLOCK_3D));
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemStack, IItemRenderer.ItemRenderType.EQUIPPED);
+            boolean is3D = (customRenderer != null) && (customRenderer.shouldUseRenderHelper(IItemRenderer.ItemRenderType.EQUIPPED, itemStack, IItemRenderer.ItemRendererHelper.BLOCK_3D));
 
-            if ((is3D) || (((itemstack1.getItem() instanceof ItemBlock)) && (RenderBlocks.renderItemIn3d(Block.getBlockFromItem(itemstack1.getItem()).getRenderType())))) {
+            if ((is3D) || (((itemStack.getItem() instanceof ItemBlock)) && (RenderBlocks.renderItemIn3d(Block.getBlockFromItem(itemStack.getItem()).getRenderType())))) {
                 float f3 = 0.5F;
                 GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
                 f3 *= 0.75F;
                 GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glScalef(-f3, -f3, f3);
-            } else if (itemstack1.getItem() == Items.bow) {
+            } else if (itemStack.getItem() == Items.bow) {
                 float f3 = 0.625F;
                 GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
                 GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glScalef(f3, -f3, f3);
                 GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-            } else if (itemstack1.getItem().isFull3D()) {
+            } else if (itemStack.getItem().isFull3D()) {
                 float f3 = 0.625F;
 
-                if (itemstack1.getItem().shouldRotateAroundWhenRendering()) {
+                if (itemStack.getItem().shouldRotateAroundWhenRendering()) {
                     GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
                     GL11.glTranslatef(0.0F, -0.125F, 0.0F);
                 }
 
-                if ((par1AbstractClientPlayer.getItemInUseCount() > 0) && (enumaction == EnumAction.block)) {
+                if ((player.getItemInUseCount() > 0) && (enumaction == EnumAction.block)) {
                     GL11.glTranslatef(0.05F, 0.0F, -0.1F);
                     GL11.glRotatef(-50.0F, 0.0F, 1.0F, 0.0F);
                     GL11.glRotatef(-10.0F, 1.0F, 0.0F, 0.0F);
@@ -268,24 +265,24 @@ public class RenderMPM extends RenderPlayer {
             }
 
 
-            if (itemstack1.getItem().requiresMultipleRenderPasses()) {
-                for (int k = 0; k <= itemstack1.getItem().getRenderPasses(itemstack1.getItemDamage()); k++) {
-                    int i = itemstack1.getItem().getColorFromItemStack(itemstack1, k);
+            if (itemStack.getItem().requiresMultipleRenderPasses()) {
+                for (int k = 0; k <= itemStack.getItem().getRenderPasses(itemStack.getItemDamage()); k++) {
+                    int i = itemStack.getItem().getColorFromItemStack(itemStack, k);
                     float f12 = (i >> 16 & 0xFF) / 255.0F;
                     float f4 = (i >> 8 & 0xFF) / 255.0F;
                     float f5 = (i & 0xFF) / 255.0F;
                     GL11.glColor4f(f12, f4, f5, 1.0F);
-                    this.renderManager.itemRenderer.renderItem(par1AbstractClientPlayer, itemstack1, k);
+                    this.renderManager.itemRenderer.renderItem(player, itemStack, k);
                 }
             }
 
 
-            int k = itemstack1.getItem().getColorFromItemStack(itemstack1, 0);
+            int k = itemStack.getItem().getColorFromItemStack(itemStack, 0);
             float f11 = (k >> 16 & 0xFF) / 255.0F;
             float f12 = (k >> 8 & 0xFF) / 255.0F;
             float f4 = (k & 0xFF) / 255.0F;
             GL11.glColor4f(f11, f12, f4, 1.0F);
-            this.renderManager.itemRenderer.renderItem(par1AbstractClientPlayer, itemstack1, 0);
+            this.renderManager.itemRenderer.renderItem(player, itemStack, 0);
 
 
             GL11.glPopMatrix();
@@ -344,7 +341,7 @@ public class RenderMPM extends RenderPlayer {
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, this.data.getBodyY(), 0.0F);
 
-        ModelMPM playerModel = data.newSkinFormat ? modelBipedMainNewFormat : modelBipedMain;
+        ModelMPM playerModel = modelBipedMainNewFormat;
         playerModel.bipedHead.postRender(0.0625F);
 
         GL11.glScalef(this.data.head.scaleX, this.data.head.scaleY, this.data.head.scaleZ);
@@ -406,7 +403,7 @@ public class RenderMPM extends RenderPlayer {
 
         GL11.glTranslatef(0.0F, this.data.getBodyY(), 0.14299999F * this.data.body.scaleZ);
 
-        ModelMPM playerModel = data.newSkinFormat ? modelBipedMainNewFormat : modelBipedMain;
+        ModelMPM playerModel = modelBipedMainNewFormat;
         playerModel.bipedBody.postRender(0.065F);
 
         if (itemstack.getItem() == Items.bow) {
@@ -445,7 +442,7 @@ public class RenderMPM extends RenderPlayer {
             this.renderpass.entity = entity;
         }
 
-        ModelMPM playerModel = data.newSkinFormat ? modelBipedMainNewFormat : modelBipedMain;
+        ModelMPM playerModel = modelBipedMainNewFormat;
         playerModel.entityModel = (this.modelArmorChestplate.entityModel = this.modelArmor.entityModel = model);
         playerModel.entity = (this.modelArmorChestplate.entity = this.modelArmor.entity = entity);
     }

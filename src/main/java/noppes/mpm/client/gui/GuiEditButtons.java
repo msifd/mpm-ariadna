@@ -63,23 +63,23 @@ public class GuiEditButtons extends GuiModelInterface {
 
         if (button.id == 1) {
             MorePlayerModels.button1 = getValue(button);
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 2) {
             MorePlayerModels.button2 = getValue(button);
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 3) {
             MorePlayerModels.button3 = getValue(button);
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 4) {
             MorePlayerModels.button4 = getValue(button);
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 5) {
             MorePlayerModels.button5 = getValue(button);
-            MorePlayerModels.instance.configLoader.updateConfig();
+            MorePlayerModels.INSTANCE.configLoader.updateConfig();
         }
         if (button.id == 66) {
             close();

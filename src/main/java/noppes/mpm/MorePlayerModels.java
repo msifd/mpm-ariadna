@@ -16,6 +16,8 @@ import noppes.mpm.commands.*;
 import noppes.mpm.config.ConfigLoader;
 import noppes.mpm.config.ConfigProp;
 import noppes.mpm.constants.EnumAnimation;
+import noppes.mpm.server.ServerEventHandler;
+import noppes.mpm.server.ServerTickHandler;
 
 import java.io.File;
 
@@ -26,11 +28,12 @@ public class MorePlayerModels {
     public static int Tooltips = 2;
 
     @SidedProxy(clientSide = "noppes.mpm.client.ClientProxy", serverSide = "noppes.mpm.CommonProxy")
-    public static CommonProxy proxy;
+    public static CommonProxy PROXY;
 
-    public static FMLEventChannel Channel;
+    @Mod.Instance
+    public static MorePlayerModels INSTANCE;
 
-    public static MorePlayerModels instance;
+    public static FMLEventChannel CHANNEL;
 
     public static int Revision = 5;
     public static boolean HasServerSide = false;
@@ -52,17 +55,13 @@ public class MorePlayerModels {
     public static int button4 = EnumAnimation.HUG.ordinal();
     @ConfigProp(info = "Used to register buttons to legsAnimationHandler")
     public static int button5 = EnumAnimation.DANCING.ordinal();
+
     public File dir;
     public ConfigLoader configLoader;
 
-
-    public MorePlayerModels() {
-        instance = this;
-    }
-
     @Mod.EventHandler
     public void load(FMLPreInitializationEvent ev) {
-        Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("MorePlayerModels");
+        CHANNEL = NetworkRegistry.INSTANCE.newEventDrivenChannel("MorePlayerModels");
 
         MinecraftServer server = MinecraftServer.getServer();
         String dir = "";
@@ -83,8 +82,8 @@ public class MorePlayerModels {
         if (Loader.isModLoaded("Morph")) {
             EnablePOV = false;
         }
-        proxy.load();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        PROXY.load();
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, PROXY);
 
 
         MinecraftForge.EVENT_BUS.register(new ServerEventHandler());

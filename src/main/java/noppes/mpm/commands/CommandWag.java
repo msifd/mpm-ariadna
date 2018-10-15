@@ -4,7 +4,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import noppes.mpm.ModelData;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.Server;
+import noppes.mpm.server.Server;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
 

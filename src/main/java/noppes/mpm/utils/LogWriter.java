@@ -1,4 +1,4 @@
-package noppes.mpm;
+package noppes.mpm.utils;
 
 import java.io.File;
 import java.io.IOException;

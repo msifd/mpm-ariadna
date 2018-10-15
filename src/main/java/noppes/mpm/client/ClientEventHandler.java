@@ -18,8 +18,10 @@ import noppes.mpm.MorePlayerModels;
 import noppes.mpm.PlayerDataController;
 import noppes.mpm.client.fx.EntityEnderFX;
 import noppes.mpm.client.gui.GuiCreationScreen;
+import noppes.mpm.client.render.EntityRendererAlt;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.server.ServerEventHandler;
 
 import java.util.List;
 import java.util.Random;
@@ -165,7 +167,7 @@ public class ClientEventHandler {
             }
         }
         if (data.animation != EnumAnimation.NONE) {
-            noppes.mpm.ServerEventHandler.checkAnimation(player, data);
+            ServerEventHandler.checkAnimation(player, data);
         }
         ModelPartData particles = data.getPartData("particles");
         if (particles != null)

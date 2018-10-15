@@ -1,4 +1,4 @@
-package noppes.mpm.client;
+package noppes.mpm.client.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;

@@ -1,4 +1,4 @@
-package noppes.mpm.client;
+package noppes.mpm.client.net;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
@@ -9,12 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.mpm.*;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.server.Server;
+import noppes.mpm.utils.LogWriter;
 
 import java.io.IOException;
 
 
-public class PacketHandlerClient
-        extends PacketHandlerServer {
+public class PacketHandlerClient extends PacketHandlerServer {
     @SubscribeEvent
     public void onPacketData(ClientCustomPacketEvent event) {
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
@@ -37,12 +38,6 @@ public class PacketHandlerClient
             NBTTagCompound compound = Server.readNBT(buffer);
             data.readFromNBT(compound);
             PlayerDataController.instance.savePlayerData(pl, data);
-        } else if (type == EnumPackets.CHAT_EVENT) {
-            EntityPlayer pl = player.worldObj.getPlayerEntityByName(Server.readString(buffer));
-            if (pl == null)
-                return;
-            String message = Server.readString(buffer);
-            ChatMessages.getChatMessages(pl.getCommandSenderName()).addMessage(message);
         } else if (type == EnumPackets.BACK_ITEM_REMOVE) {
             EntityPlayer pl = player.worldObj.getPlayerEntityByName(Server.readString(buffer));
             if (pl == null)

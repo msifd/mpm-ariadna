@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextBlockClient {
-    public List<IChatComponent> lines = new ArrayList();
+    public List<IChatComponent> lines = new ArrayList<>();
     public int color = 14737632;
     public String name;
     private ChatStyle style;

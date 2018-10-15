@@ -17,6 +17,6 @@ public class CommonProxy
     }
 
     public void load() {
-        MorePlayerModels.Channel.register(new PacketHandlerServer());
+        MorePlayerModels.CHANNEL.register(new PacketHandlerServer());
     }
 }

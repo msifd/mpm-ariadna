@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
 import noppes.mpm.ModelData;
 import noppes.mpm.PlayerDataController;
-import noppes.mpm.Server;
+import noppes.mpm.server.Server;
 import noppes.mpm.constants.EnumPackets;
 
 public class CommandSetUrl

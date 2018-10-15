@@ -2,10 +2,11 @@ package noppes.mpm.client.gui;
 
 import net.minecraft.client.gui.GuiScreen;
 import noppes.mpm.ModelData;
-import noppes.mpm.client.PresetController;
+import noppes.mpm.client.presets.PresetController;
 import noppes.mpm.client.gui.util.GuiInterface;
 import noppes.mpm.client.gui.util.GuiNpcButton;
 import noppes.mpm.client.gui.util.GuiNpcTextField;
+import noppes.mpm.client.presets.Preset;
 
 public class GuiPresetSave extends GuiInterface {
     private ModelData data;
@@ -32,7 +33,7 @@ public class GuiPresetSave extends GuiInterface {
             String name = getTextField(0).getText().trim();
             if (name.isEmpty())
                 return;
-            noppes.mpm.client.Preset preset = new noppes.mpm.client.Preset();
+            Preset preset = new Preset();
             preset.name = name;
             preset.data = this.data.copy();
             PresetController.instance.addPreset(preset);

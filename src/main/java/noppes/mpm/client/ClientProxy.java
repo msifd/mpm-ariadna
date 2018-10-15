@@ -13,10 +13,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import noppes.mpm.CommonProxy;
 import noppes.mpm.MorePlayerModels;
+import noppes.mpm.client.net.PacketHandlerClient;
+import noppes.mpm.client.presets.PresetController;
+import noppes.mpm.client.render.RenderEventHandler;
 
 
-public class ClientProxy
-        extends CommonProxy {
+public class ClientProxy extends CommonProxy {
     public static KeyBinding Screen;
     public static KeyBinding Sleep;
     public static KeyBinding Sit;
@@ -40,8 +42,8 @@ public class ClientProxy
     }
 
     public void load() {
-        MorePlayerModels.Channel.register(new PacketHandlerClient());
-        new PresetController(MorePlayerModels.instance.dir);
+        MorePlayerModels.CHANNEL.register(new PacketHandlerClient());
+        new PresetController(MorePlayerModels.INSTANCE.dir);
 
         ClientRegistry.registerKeyBinding(Screen = new KeyBinding("CharacterScreen", 88, "key.categories.gameplay"));
         ClientRegistry.registerKeyBinding(Sleep = new KeyBinding("MPM 1", 44, "key.categories.gameplay"));
@@ -51,10 +53,10 @@ public class ClientProxy
         ClientRegistry.registerKeyBinding(Crawl = new KeyBinding("MPM 5", 48, "key.categories.gameplay"));
 
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, RenderEvent.renderer);
+        RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, RenderEventHandler.renderer);
 
 
         FMLCommonHandler.instance().bus().register(new ClientEventHandler());
-        MinecraftForge.EVENT_BUS.register(new RenderEvent());
+        MinecraftForge.EVENT_BUS.register(new RenderEventHandler());
     }
 }

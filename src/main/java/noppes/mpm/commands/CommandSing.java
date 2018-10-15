@@ -3,6 +3,7 @@ package noppes.mpm.commands;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.server.Server;
 
 public class CommandSing extends MpmCommandInterface {
     public String getCommandName() {
@@ -27,7 +28,7 @@ public class CommandSing extends MpmCommandInterface {
         float var7 = (float) Math.pow(2.0D, (note - 12) / 12.0D);
         player.worldObj.playSoundEffect(player.posX, player.posY, player.posZ, "note.harp", 3.0F, var7);
 
-        noppes.mpm.Server.sendAssociatedData(player, EnumPackets.PARTICLE, new Object[]{Integer.valueOf(1), Double.valueOf(player.posX), Double.valueOf(player.posY + 2.0D), Double.valueOf(player.posZ), Double.valueOf(note / 24.0D)});
+        Server.sendAssociatedData(player, EnumPackets.PARTICLE, new Object[]{Integer.valueOf(1), Double.valueOf(player.posX), Double.valueOf(player.posY + 2.0D), Double.valueOf(player.posZ), Double.valueOf(note / 24.0D)});
     }
 
 

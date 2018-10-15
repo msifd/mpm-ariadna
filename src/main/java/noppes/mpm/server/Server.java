@@ -1,4 +1,4 @@
-package noppes.mpm;
+package noppes.mpm.server;
 
 import com.google.common.base.Charsets;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
@@ -12,12 +12,12 @@ import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.village.MerchantRecipeList;
+import noppes.mpm.MorePlayerModels;
 import noppes.mpm.constants.EnumPackets;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 
 public class Server {
     public static boolean sendData(EntityPlayerMP player, EnumPackets enu, Object... obs) {
@@ -25,7 +25,7 @@ public class Server {
         try {
             if (!fillBuffer(buffer, enu, obs))
                 return false;
-            MorePlayerModels.Channel.sendTo(new FMLProxyPacket(buffer, "MorePlayerModels"), player);
+            MorePlayerModels.CHANNEL.sendTo(new FMLProxyPacket(buffer, "MorePlayerModels"), player);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class Server {
             if (!fillBuffer(buffer, enu, obs))
                 return;
             TargetPoint point = new TargetPoint(entity.dimension, entity.posX, entity.posY, entity.posZ, 60.0D);
-            MorePlayerModels.Channel.sendToAllAround(new FMLProxyPacket(buffer, "MorePlayerModels"), point);
+            MorePlayerModels.CHANNEL.sendToAllAround(new FMLProxyPacket(buffer, "MorePlayerModels"), point);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,7 +49,7 @@ public class Server {
         try {
             if (!fillBuffer(buffer, enu, obs))
                 return;
-            MorePlayerModels.Channel.sendToAll(new FMLProxyPacket(buffer, "MorePlayerModels"));
+            MorePlayerModels.CHANNEL.sendToAll(new FMLProxyPacket(buffer, "MorePlayerModels"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -8,10 +8,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
-import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
 import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
 
 public class PacketHandlerServer {
     @SubscribeEvent

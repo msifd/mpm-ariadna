@@ -94,7 +94,6 @@ public class GuiModelInterface
         float f = player.renderYawOffset;
         float f2 = player.rotationYaw;
         float f3 = player.rotationPitch;
-        float f4 = player.prevRotationYawHead;
         player.renderYawOffset = rotation;
         player.rotationYaw = ((float) Math.atan(f5 / 80.0F) * 40.0F + rotation);
         player.rotationPitch = (-(float) Math.atan(f6 / 80.0F) * 20.0F);
@@ -110,7 +109,7 @@ public class GuiModelInterface
         player.renderYawOffset = f;
         player.rotationYaw = f2;
         player.rotationPitch = f3;
-        player.prevRotationYawHead = f4;
+        player.rotationYawHead = player.prevRotationYawHead = f2;
 
         GL11.glPopMatrix();
         RenderHelper.disableStandardItemLighting();

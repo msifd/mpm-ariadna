@@ -1,11 +1,11 @@
 package noppes.mpm.client.model.part;
 
 import net.minecraft.client.model.ModelRenderer;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.model.Model2DRenderer;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelPartInterface;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 
 public class ModelHair extends ModelPartInterface {
     private Model2DRenderer model;

@@ -4,8 +4,8 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.MpmClientProxy;
+import noppes.mpm.data.ModelPartData;
 import org.lwjgl.opengl.GL11;
 
 public class EntityEnderFX extends EntityPortalFX {

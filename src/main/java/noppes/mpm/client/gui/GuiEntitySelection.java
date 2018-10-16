@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import noppes.mpm.data.ModelData;
 import noppes.mpm.client.gui.util.GuiListActionListener;
 import noppes.mpm.client.gui.util.GuiNPCStringSlot;
+import noppes.mpm.data.ModelData;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Collections;

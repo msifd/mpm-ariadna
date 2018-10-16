@@ -20,13 +20,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.client.SkinLoader;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelMpmNewFormat;
 import noppes.mpm.client.model.ModelRenderPassHelper;
 import noppes.mpm.constants.EnumAnimation;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
 import org.lwjgl.opengl.GL11;
 
 import java.util.UUID;

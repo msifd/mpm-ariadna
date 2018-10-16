@@ -12,15 +12,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.MorePlayerModels;
-import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.client.fx.EntityEnderFX;
 import noppes.mpm.client.gui.GuiCreationScreen;
 import noppes.mpm.client.render.EntityRendererAlt;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
+import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.server.ServerEventHandler;
 
 import java.util.List;
@@ -145,6 +145,7 @@ public class ClientEventHandler {
             net.minecraft.entity.MPMEntityUtil.Copy(player, entity);
             entity.onUpdate();
         }
+
         if (data.inLove > 0) {
             data.inLove -= 1;
             if (player.getRNG().nextBoolean()) {

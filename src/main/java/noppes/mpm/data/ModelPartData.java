@@ -61,11 +61,10 @@ public class ModelPartData {
     }
 
     public String getColor() {
-        String str = Integer.toHexString(this.color);
-
+        StringBuilder str = new StringBuilder(Integer.toHexString(this.color));
         while (str.length() < 6) {
-            str = "0" + str;
+            str.append('0');
         }
-        return str;
+        return str.toString();
     }
 }

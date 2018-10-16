@@ -2,11 +2,11 @@ package noppes.mpm.client.model.part;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.model.Model2DRenderer;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelPartInterface;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 
 public class ModelWings extends ModelPartInterface {
     private Model2DRenderer lWing;

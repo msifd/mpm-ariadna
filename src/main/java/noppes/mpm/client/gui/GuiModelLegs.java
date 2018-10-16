@@ -1,9 +1,9 @@
 package noppes.mpm.client.gui;
 
 import net.minecraft.client.gui.GuiScreen;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.gui.util.GuiModelInterface;
 import noppes.mpm.client.gui.util.GuiNpcButton;
+import noppes.mpm.data.ModelPartData;
 import org.lwjgl.input.Keyboard;
 
 public class GuiModelLegs extends GuiModelInterface {

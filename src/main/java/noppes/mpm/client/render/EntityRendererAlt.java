@@ -4,9 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
+import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.data.ModelData;
 import noppes.mpm.data.PlayerDataController;
-import noppes.mpm.constants.EnumAnimation;
 
 public class EntityRendererAlt extends EntityRenderer {
     public EntityRendererAlt(Minecraft par1Minecraft) {

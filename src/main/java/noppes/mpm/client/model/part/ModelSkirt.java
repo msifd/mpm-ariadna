@@ -2,11 +2,11 @@ package noppes.mpm.client.model.part;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelPartInterface;
 import noppes.mpm.client.model.ModelPlaneRenderer;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import org.lwjgl.opengl.GL11;
 
 

@@ -8,10 +8,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.constants.EnumAnimation;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
 
 public class ServerEventHandler {
     public static void checkAnimation(EntityPlayer player, ModelData data) {
@@ -114,7 +114,6 @@ public class ServerEventHandler {
             net.minecraft.nbt.NBTTagCompound tag = item.writeToNBT(new net.minecraft.nbt.NBTTagCompound());
             Server.sendAssociatedData(player, EnumPackets.BACK_ITEM_UPDATE, new Object[]{player.getCommandSenderName(), tag});
         }
-
 
         data.backItem = item;
         if (data.animation != EnumAnimation.NONE)

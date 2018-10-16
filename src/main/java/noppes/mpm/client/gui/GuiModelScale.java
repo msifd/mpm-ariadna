@@ -2,12 +2,12 @@ package noppes.mpm.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartConfig;
 import noppes.mpm.client.gui.util.GuiModelInterface;
 import noppes.mpm.client.gui.util.GuiNpcButton;
 import noppes.mpm.client.gui.util.GuiNpcLabel;
 import noppes.mpm.client.gui.util.GuiNpcSlider;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartConfig;
 
 public class GuiModelScale extends GuiModelInterface implements noppes.mpm.client.gui.util.ISliderListener {
     private GuiScreen parent;

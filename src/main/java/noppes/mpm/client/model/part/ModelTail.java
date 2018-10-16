@@ -5,8 +5,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.MpmClientProxy;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelScaleRenderer;
@@ -15,6 +13,8 @@ import noppes.mpm.client.model.part.tails.ModelRodentTail;
 import noppes.mpm.client.model.part.tails.ModelSquirrelTail;
 import noppes.mpm.client.model.part.tails.ModelTailFin;
 import noppes.mpm.constants.EnumAnimation;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import org.lwjgl.opengl.GL11;
 
 public class ModelTail extends ModelScaleRenderer {

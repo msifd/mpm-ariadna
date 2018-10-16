@@ -1,9 +1,9 @@
 package noppes.mpm.client.model.part;
 
 import net.minecraft.client.model.ModelRenderer;
-import noppes.mpm.data.ModelData;
 import noppes.mpm.client.model.Model2DRenderer;
 import noppes.mpm.client.model.ModelMPM;
+import noppes.mpm.data.ModelData;
 
 public class ModelBreasts extends noppes.mpm.client.model.ModelPartInterface {
     private Model2DRenderer breasts;

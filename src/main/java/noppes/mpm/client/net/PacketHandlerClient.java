@@ -7,10 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.server.PacketHandlerServer;
-import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
+import noppes.mpm.server.PacketHandlerServer;
 import noppes.mpm.server.Server;
 import noppes.mpm.utils.LogWriter;
 

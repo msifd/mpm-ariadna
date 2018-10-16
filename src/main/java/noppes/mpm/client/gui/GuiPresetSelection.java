@@ -9,13 +9,13 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import noppes.mpm.data.ModelData;
 import noppes.mpm.client.gui.util.GuiInterface;
 import noppes.mpm.client.gui.util.GuiListActionListener;
 import noppes.mpm.client.gui.util.GuiNPCStringSlot;
 import noppes.mpm.client.gui.util.GuiNpcButton;
 import noppes.mpm.client.presets.Preset;
 import noppes.mpm.client.presets.PresetController;
+import noppes.mpm.data.ModelData;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Collections;

@@ -11,12 +11,11 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.MorePlayerModels;
-import noppes.mpm.data.PlayerDataController;
 import noppes.mpm.client.gui.util.*;
 import noppes.mpm.constants.EnumPackets;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.PlayerDataController;
 import org.lwjgl.input.Keyboard;
 
 import java.lang.reflect.Modifier;
@@ -249,6 +248,7 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
             for (EntityPlayer player : players) {
                 ModelData data = PlayerDataController.instance.getPlayerData(player);
                 data.loaded = false;
+                data.reloadBoxes = true;
             }
         }
 

@@ -1,10 +1,10 @@
-package noppes.mpm.client.model.part;
+package noppes.mpm.client.model.part.hands;
 
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.model.Model2DRenderer;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelPartInterface;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 
 public class ModelClaws
         extends ModelPartInterface {

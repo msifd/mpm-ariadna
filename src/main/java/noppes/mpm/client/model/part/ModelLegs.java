@@ -4,8 +4,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
-import noppes.mpm.data.ModelData;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.MpmClientProxy;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelScaleRenderer;
@@ -13,6 +11,8 @@ import noppes.mpm.client.model.part.legs.ModelDigitigradeLegs;
 import noppes.mpm.client.model.part.legs.ModelMermaidLegs;
 import noppes.mpm.client.model.part.legs.ModelNagaLegs;
 import noppes.mpm.constants.EnumAnimation;
+import noppes.mpm.data.ModelData;
+import noppes.mpm.data.ModelPartData;
 import org.lwjgl.opengl.GL11;
 
 

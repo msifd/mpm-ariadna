@@ -2,10 +2,10 @@ package noppes.mpm.client.model.part;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.data.ModelData;
 import noppes.mpm.client.MpmClientProxy;
 import noppes.mpm.client.model.ModelMPM;
 import noppes.mpm.client.model.ModelScaleRenderer;
+import noppes.mpm.data.ModelData;
 
 public class ModelBrain extends ModelScaleRenderer {
     private static final ResourceLocation texture = new ResourceLocation("moreplayermodels:textures/head/brain.png");

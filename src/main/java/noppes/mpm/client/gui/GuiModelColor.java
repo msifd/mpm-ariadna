@@ -4,10 +4,10 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.util.ResourceLocation;
-import noppes.mpm.data.ModelPartData;
 import noppes.mpm.client.gui.util.GuiModelInterface;
 import noppes.mpm.client.gui.util.GuiNpcTextField;
 import noppes.mpm.client.gui.util.ITextfieldListener;
+import noppes.mpm.data.ModelPartData;
 import org.lwjgl.opengl.GL11;
 
 import javax.imageio.ImageIO;

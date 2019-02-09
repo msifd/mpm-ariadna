@@ -7,18 +7,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ImageBufferDownloadAlt extends ImageBufferDownload {
-    private ModelData data;
-
-    public ImageBufferDownloadAlt(ModelData data) {
-        this.data = data;
-    }
-
     @Override
     public BufferedImage parseUserSkin(BufferedImage bufferedImage) {
         if (bufferedImage == null)
             return null;
 
-        if (data != null && bufferedImage.getWidth() != bufferedImage.getHeight())
+        if (bufferedImage.getWidth() != bufferedImage.getHeight())
             bufferedImage = transformToNewFormat(bufferedImage);
 
         return bufferedImage;

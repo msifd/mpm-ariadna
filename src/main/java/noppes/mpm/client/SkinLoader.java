@@ -52,7 +52,7 @@ public class SkinLoader {
 
         final ResourceLocation location = new ResourceLocation("skins/" + gp.getName());
         if (url.startsWith("file:"))
-            loadLocalTexture(skinFile, location, url.replace("file:", ""));
+            loadLocalTexture(skinFile, location, url.substring("file:".length()));
         else
             loadPlayerTexture(skinFile, location, url);
         player.func_152121_a(MinecraftProfileTexture.Type.SKIN, location);

@@ -60,10 +60,10 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
         this.xOffset = (entity == null ? 0 : 50);
         if (entity != null)
             title = (String) EntityList.classToStringMapping.get(this.playerdata.getEntityClass());
-        addButton(new GuiNpcButton(1, this.guiLeft + 140, this.guiTop + 4, 100, 20, title));
+        addButton(new GuiNpcButton(1, this.guiLeft + 20, this.guiTop + 4, 100, 20, title));
 
-        addButton(this.prev = new GuiNpcButton(0, this.guiLeft + 118, this.guiTop + 4, 20, 20, "<"));
-        addButton(this.next = new GuiNpcButton(2, this.guiLeft + 242, this.guiTop + 4, 20, 20, ">"));
+        addButton(this.prev = new GuiNpcButton(0, this.guiLeft, this.guiTop + 4, 20, 20, "<"));
+        addButton(this.next = new GuiNpcButton(2, this.guiLeft + 120, this.guiTop + 4, 20, 20, ">"));
         this.prev.enabled = (getCurrentEntityIndex() >= 0);
         this.next.enabled = (getCurrentEntityIndex() < this.list.size() - 1);
 
@@ -103,8 +103,8 @@ public class GuiCreationScreen extends GuiModelInterface implements ITextfieldLi
     private void showPlayerButtons() {
         int y = this.guiTop;
 
-        y += 22;
-        addButton(new GuiNpcButton(8, this.guiLeft + 4, y, 96, 20, "Scale"));
+        y += 24;
+        addButton(new GuiNpcButton(8, this.guiLeft, y, 100, 20, "Scale"));
 
         y += 22;
         addButton(new GuiNpcButton(4, this.guiLeft + 50, y, 50, 20, "selectServer.edit"));

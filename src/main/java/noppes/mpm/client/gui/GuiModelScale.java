@@ -75,6 +75,12 @@ public class GuiModelScale extends GuiModelInterface implements noppes.mpm.clien
         addSlider(new GuiNpcSlider(this, 12, this.guiLeft + 50, y, (config.scaleZ - 0.25F) / 2.0F));
     }
 
+    private void drawOffsetSlider(int y, ModelPartConfig config) {
+        y += 22;
+        addLabel(new GuiNpcLabel(12, "Offset", this.guiLeft, y + 5, 16777215));
+        addSlider(new GuiNpcSlider(this, 12, this.guiLeft + 50, y, (config.scaleZ - 0.25F) / 2.0F));
+    }
+
 
     protected void actionPerformed(GuiButton btn) {
         super.actionPerformed(btn);

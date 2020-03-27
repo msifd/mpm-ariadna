@@ -44,7 +44,6 @@ public class ModelMPM extends ModelBiped {
     private ModelLegs legs;
     private ModelScaleRenderer headwear;
     private ModelTail tail;
-    private ModelBrain brain;
 
     private float z;
 
@@ -113,7 +112,6 @@ public class ModelMPM extends ModelBiped {
             bipedHead.addChild(beard = new ModelBeard(this));
             bipedHead.addChild(snout = new ModelSnout(this));
             bipedHead.addChild(horns = new ModelHorns(this));
-            bipedHead.addChild(brain = new ModelBrain(this));
 
             bipedBody.addChild(tail = new ModelTail(this));
             bipedBody.addChild(wings = new ModelWings(this));
@@ -147,7 +145,6 @@ public class ModelMPM extends ModelBiped {
             handWingsR.setData(data, entity);
             skirt.setData(data, entity);
             horns.setData(data, entity);
-            brain.setData(data, entity);
         }
 
         breasts.setData(data, entity);
@@ -186,11 +183,7 @@ public class ModelMPM extends ModelBiped {
             GL11.glTranslatef(0.0F, -12.0F * scale * par7, 0.0F);
         }
 
-        final float doubleHeadOffset = data.doubleHead ? data.head.scaleX * 0.3f : 0;
-        renderHead(par1Entity, par7, doubleHeadOffset);
-        if (data.doubleHead)
-            renderHead(par1Entity, par7, -doubleHeadOffset);
-
+        renderHead(par1Entity, par7);
         renderArms(par1Entity, par7, false);
         renderBody(par1Entity, par7);
         if (data.animation == EnumAnimation.BOW) {
@@ -270,10 +263,13 @@ public class ModelMPM extends ModelBiped {
         }
     }
 
-    private void renderHead(Entity entity, float f, float xOffset) {
+    private void renderHead(Entity entity, float f) {
+        if (data.noHead)
+            return;
+
         bindPlayerTexture();
 
-        float x = xOffset;
+        float x = 0;
         float y = data.getBodyY();
         float z = 0.0F;
 

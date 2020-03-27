@@ -12,8 +12,9 @@ public class GuiModelHead extends GuiModelInterface {
     private static final String[] arrBeard = {"gui.no", "Player", "Standard", "Viking", "Long", "Short"};
     private static final String[] arrMohawk = {"gui.no", "Type1", "Type2"};
     private static final String[] arrSnout = {"gui.no", "Player Small", "Player Medium", "Player Large", "Player Bunny", "Small1", "Medium1", "Large1", "Bunny1", "Beak1"};
-    private static final String[] arrHorns = {"gui.no", "Player Bull", "Player Antlers", "Player AntennasB", "Player AntennasF", "Bull", "Antlers", "AntennasB", "AntennasF"};
-    private static final String[] arrEars = {"gui.no", "Player", "Player Bunny", "Bunny", "Type1", "Short Elf", "Long Elf", "Sides Elf"};
+    private static final String[] arrEars = {"gui.no", "Player", "Player Bunny", "Bunny", "Type1", "Elf up", "Elf sides"};
+    private static final String[] arrHorns = {"gui.no", "Player Bull", "Player Antlers", "Player AntennasB", "Player AntennasF", "Bull", "Antlers", "AntennasB", "AntennasF", "Forehead small"};
+    private static final String[] arrNoHead = {"gui.no", "gui.yes"};
 
     private GuiScreen parent;
 
@@ -25,7 +26,7 @@ public class GuiModelHead extends GuiModelInterface {
     public void initGui() {
         super.initGui();
 
-        int y = this.guiTop + 20;
+        int y = this.guiTop;
 
         y += 22;
         addButton(new GuiNpcButton(0, this.guiLeft + 50, y, 70, 20, arrHeadwear, this.playerdata.headwear));
@@ -73,6 +74,10 @@ public class GuiModelHead extends GuiModelInterface {
         if (horns != null) {
             addButton(new GuiNpcButton(16, this.guiLeft + 122, y, 40, 20, horns.getColor()));
         }
+
+        y += 22;
+        addButton(new GuiNpcButton(7, this.guiLeft + 50, y, 70, 20, arrNoHead, this.playerdata.noHead ? 1 : 0));
+        addLabel(new GuiNpcLabel(7, "No head", this.guiLeft, y + 5, 16777215));
     }
 
     private int getEars(ModelPartData data) {
@@ -86,20 +91,20 @@ public class GuiModelHead extends GuiModelInterface {
             return 4;
         if (data.type == 1)
             return 3;
-        if (data.type == 2)
+        if (data.type == 2) // elf up
             return 5;
-        if (data.type == 3)
+        if (data.type == 3) // elf sides
             return 6;
-        if (data.type == 4)
-            return 7;
         return 0;
     }
 
     private int getHorns(ModelPartData data) {
         if (data == null)
             return 0;
-        if (data.playerTexture) {
-            return data.type + 1;
+        if (data.type <= 3) {
+            if (data.playerTexture)
+                return data.type + 1;
+            return data.type + 5;
         }
         return data.type + 5;
     }
@@ -182,11 +187,9 @@ public class GuiModelHead extends GuiModelInterface {
                 if (value == 4)
                     data.setTexture("ears/type1", 0);
                 if (value == 5)
-                    data.setTexture("", 2);
+                    data.setTexture("", 2); // elf up
                 if (value == 6)
-                    data.setTexture("", 3);
-                if (value == 7)
-                    data.setTexture("", 4);
+                    data.setTexture("", 3); // elf sides
             }
             initGui();
         }
@@ -207,7 +210,18 @@ public class GuiModelHead extends GuiModelInterface {
                     data.setTexture("horns/antennas", 2);
                 if (value == 8)
                     data.setTexture("horns/antennas", 3);
+                if (value == 9) {
+                    data.setTexture("horns/antennas", 4);
+                    data.playerTexture = false;
+                }
             }
+            initGui();
+        }
+
+        if (button.id == 7) {
+            int value = button.getValue();
+            System.out.println(value);
+            playerdata.noHead = value == 1;
             initGui();
         }
 

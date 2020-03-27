@@ -12,11 +12,9 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'idea'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
 
 version = "1.19.2"
-group= "noppes" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "noppes"
 archivesBaseName = "mpm"
 
 minecraft {
@@ -38,16 +36,19 @@ processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
-    // copy everything else, thats not the mcmod.info
+
+    // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
 
-// Fix IDEA resources
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava { sourceCompatibility = targetCompatibility = '1.8' }
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
 idea { module { inheritOutputDirs = true } }

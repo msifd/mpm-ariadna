@@ -18,8 +18,7 @@ public class ModelDataShared {
     public byte breasts = 0;
     public byte headwear = 2;
     public byte armsAmputee = 0;
-    public boolean doubleHead = false;
-    public boolean brainHead = false;
+    public boolean noHead = false;
     protected EntityLivingBase entity;
     protected HashMap<String, ModelPartData> parts = new HashMap<>();
 
@@ -48,8 +47,7 @@ public class ModelDataShared {
         compound.setTag("Parts", list);
 
         compound.setByte("ArmsAmputee", this.armsAmputee);
-        compound.setBoolean("DoubleHead", this.doubleHead);
-        compound.setBoolean("BrainHead", this.brainHead);
+        compound.setBoolean("NoHead", this.noHead);
 
         return compound;
     }
@@ -77,8 +75,7 @@ public class ModelDataShared {
         this.parts = parts;
 
         this.armsAmputee = compound.getByte("ArmsAmputee");
-        this.doubleHead = compound.getBoolean("DoubleHead");
-        this.brainHead = compound.getBoolean("BrainHead");
+        this.noHead = compound.getBoolean("NoHead");
     }
 
     public Class<? extends EntityLivingBase> getEntityClass() {

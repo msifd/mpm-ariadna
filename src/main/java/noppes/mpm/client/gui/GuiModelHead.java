@@ -12,8 +12,8 @@ public class GuiModelHead extends GuiModelInterface {
     private static final String[] arrBeard = {"gui.no", "Player", "Standard", "Viking", "Long", "Short"};
     private static final String[] arrMohawk = {"gui.no", "Type1", "Type2"};
     private static final String[] arrSnout = {"gui.no", "Player Small", "Player Medium", "Player Large", "Player Bunny", "Small1", "Medium1", "Large1", "Bunny1", "Beak1"};
-    private static final String[] arrEars = {"gui.no", "Player", "Player Bunny", "Bunny", "Type1", "Short Elf", "Long Elf"};
     private static final String[] arrHorns = {"gui.no", "Player Bull", "Player Antlers", "Player AntennasB", "Player AntennasF", "Bull", "Antlers", "AntennasB", "AntennasF"};
+    private static final String[] arrEars = {"gui.no", "Player", "Player Bunny", "Bunny", "Type1", "Short Elf", "Long Elf", "Sides Elf"};
 
     private GuiScreen parent;
 
@@ -90,6 +90,8 @@ public class GuiModelHead extends GuiModelInterface {
             return 5;
         if (data.type == 3)
             return 6;
+        if (data.type == 4)
+            return 7;
         return 0;
     }
 
@@ -183,6 +185,8 @@ public class GuiModelHead extends GuiModelInterface {
                     data.setTexture("", 2);
                 if (value == 6)
                     data.setTexture("", 3);
+                if (value == 7)
+                    data.setTexture("", 4);
             }
             initGui();
         }

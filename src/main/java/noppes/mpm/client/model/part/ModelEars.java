@@ -12,6 +12,7 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
     private ModelRenderer bunny;
     private ModelRenderer shortElf;
     private ModelRenderer longElf;
+    private ModelRenderer sidesElf;
 
     public ModelEars(noppes.mpm.client.model.ModelMPM par1ModelBase) {
         super(par1ModelBase);
@@ -90,6 +91,21 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
             ear.rotateAngleZ = (float) Math.PI * 0.65f * side;
             this.longElf.addChild(ear);
         }
+
+        this.sidesElf = new ModelRenderer(this.base);
+        addChild(this.sidesElf);
+        for (int i = 0; i < 2; i++) {
+            final boolean leftSide = i % 2 == 0;
+            final int side = leftSide ? -1 : 1;
+            final ModelRenderer ear = new ModelRenderer(this.base, 24, 0);
+            ear.mirror = leftSide;
+            ear.addBox(-1.5f, 0, -0.5f, 3, 7, 1);
+            ear.setRotationPoint(-4f * side, -4f, 0);
+            ear.rotateAngleX = (float) Math.PI * 0.0f;
+            ear.rotateAngleY = (float) Math.PI * -0.0f * side;
+            ear.rotateAngleZ = (float) Math.PI * 0.5f * side;
+            this.sidesElf.addChild(ear);
+        }
     }
 
     public void initData(ModelData data) {
@@ -105,6 +121,7 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
         this.bunny.isHidden = (config.type != 1);
         this.shortElf.isHidden = (config.type != 2);
         this.longElf.isHidden = (config.type != 3);
+        this.sidesElf.isHidden = (config.type != 4);
 
         if (!config.playerTexture) {
             this.location = config.getResource();

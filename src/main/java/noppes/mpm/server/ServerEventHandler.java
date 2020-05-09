@@ -1,10 +1,12 @@
 package noppes.mpm.server;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -14,6 +16,11 @@ import noppes.mpm.data.ModelData;
 import noppes.mpm.data.PlayerDataController;
 
 public class ServerEventHandler {
+    public void init() {
+        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
+    }
+
     public static void checkAnimation(EntityPlayer player, ModelData data) {
         double motionX = player.prevPosX - player.posX;
         double motionY = player.prevPosY - player.posY;
@@ -105,6 +112,9 @@ public class ServerEventHandler {
             return;
         EntityPlayerMP player = (EntityPlayerMP) event.player;
         ModelData data = PlayerDataController.instance.getPlayerData(player);
+
+        player.eyeHeight = player.getDefaultEyeHeight() + data.offsetY();
+
         net.minecraft.item.ItemStack item = player.inventory.mainInventory[0];
         if (data.backItem == item)
             return;

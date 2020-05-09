@@ -60,6 +60,8 @@ public class MorePlayerModels {
     public File dir;
     public ConfigLoader configLoader;
 
+    private final ServerEventHandler serverEventHandler = new ServerEventHandler();
+
     @Mod.EventHandler
     public void load(FMLPreInitializationEvent ev) {
         CHANNEL = NetworkRegistry.INSTANCE.newEventDrivenChannel("MorePlayerModels");
@@ -85,7 +87,7 @@ public class MorePlayerModels {
         }
         PROXY.load();
 
-        MinecraftForge.EVENT_BUS.register(new ServerEventHandler());
+        serverEventHandler.init();
         FMLCommonHandler.instance().bus().register(new ServerTickHandler());
     }
 

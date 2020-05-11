@@ -113,7 +113,10 @@ public class ServerEventHandler {
         EntityPlayerMP player = (EntityPlayerMP) event.player;
         ModelData data = PlayerDataController.instance.getPlayerData(player);
 
-        player.eyeHeight = player.getDefaultEyeHeight() + data.offsetY();
+        if (player.isEntityInsideOpaqueBlock())
+            player.eyeHeight = player.getDefaultEyeHeight();
+        else
+            player.eyeHeight = player.getDefaultEyeHeight() + data.offsetY();
 
         net.minecraft.item.ItemStack item = player.inventory.mainInventory[0];
         if (data.backItem == item)

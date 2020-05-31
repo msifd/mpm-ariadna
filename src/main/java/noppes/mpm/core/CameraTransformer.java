@@ -36,20 +36,20 @@ public class CameraTransformer implements IClassTransformer, Opcodes {
 
         final ModelData data = PlayerDataController.instance.getPlayerData(player);
 
-        float offset = -data.offsetY();
+        float offset = data.offsetY();
         if (data.animation == EnumAnimation.SITTING)
-            offset += 0.65F - data.getLegsY();
+            offset -= -data.getLegsY() + 0.6f;
         if (data.isSleeping() || data.animation == EnumAnimation.CRAWLING)
-            offset = 1.18f;
-        if ((offset < 1.68F) && isBlocked(player))
+            offset = -1.18f;
+        if (offset > 0 && isBlocked(player, offset + 0.1f))
             offset = 0;
 
-        return offset;
+        return -offset;
     }
 
-    private static boolean isBlocked(EntityPlayer player) {
+    private static boolean isBlocked(EntityPlayer player, float offset) {
         int x = MathHelper.floor_double(player.posX);
-        int y = MathHelper.floor_double(player.posY) + 1;
+        int y = MathHelper.floor_double(player.posY + offset);
         int z = MathHelper.floor_double(player.posZ);
         return !player.worldObj.isAirBlock(x, y, z);
     }

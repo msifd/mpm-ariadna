@@ -13,25 +13,6 @@ public class EntityRendererAlt extends EntityRenderer {
         super(par1Minecraft, par1Minecraft.getResourceManager());
     }
 
-    public void updateCameraAndRender(float par1) {
-        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-
-        if ((player == null) || (player.isPlayerSleeping())) {
-            super.updateCameraAndRender(par1);
-            return;
-        }
-        ModelData data = PlayerDataController.instance.getPlayerData(player);
-        player.yOffset -= data.offsetY();
-        if (data.animation == EnumAnimation.SITTING)
-            player.yOffset += 0.5F - data.getLegsY();
-        if (data.isSleeping() || data.animation == EnumAnimation.CRAWLING)
-            player.yOffset = 2.8F;
-        if ((player.yOffset < 1.4F) && (isBlocked(player)))
-            player.yOffset = 1.4F;
-        super.updateCameraAndRender(par1);
-        player.yOffset = 1.62F;
-    }
-
     private boolean isBlocked(EntityPlayer player) {
         int x = MathHelper.floor_double(player.posX);
         int y = MathHelper.floor_double(player.posY) + 1;

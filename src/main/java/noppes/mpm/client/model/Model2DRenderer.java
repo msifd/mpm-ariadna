@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 
 public class Model2DRenderer extends ModelRenderer {
+    private int precision = 1;
     private float thickness = 1.0F;
     private float scaleY = 1.0F;
     private float scaleX = 1.0F;
@@ -77,12 +78,16 @@ public class Model2DRenderer extends ModelRenderer {
         this.thickness = thickness;
     }
 
+    public void setPrecision(int precision) {
+        this.precision = precision;
+    }
+
     @SideOnly(Side.CLIENT)
     private void compileDisplayList(float par1) {
         this.displayList = GLAllocation.generateDisplayLists(1);
         GL11.glNewList(this.displayList, 4864);
 
-        GL11.glScalef(this.scaleX * this.width / this.height, this.scaleY, this.thickness);
+        GL11.glScalef(this.scaleX * this.width / this.height, this.scaleY, 1);
         GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
         if (this.mirror) {
             GL11.glTranslatef(0.0F, 0.0F, -1.0F * par1);
@@ -90,7 +95,7 @@ public class Model2DRenderer extends ModelRenderer {
         }
 
         GL11.glTranslated(this.rotationOffsetX * par1, this.rotationOffsetY * par1, 0.0D);
-        ItemRenderer.renderItemIn2D(Tessellator.instance, this.x1, this.y1, this.x2, this.y2, this.width, this.height, par1);
+        ItemRenderer.renderItemIn2D(Tessellator.instance, this.x1, this.y1, this.x2, this.y2, this.width * precision, this.height * precision, thickness * 0.0625f);
 
         GL11.glEndList();
         this.compiled = true;

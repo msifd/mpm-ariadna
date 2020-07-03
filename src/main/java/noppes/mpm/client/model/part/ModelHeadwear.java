@@ -10,6 +10,7 @@ public class ModelHeadwear extends ModelScaleRenderer {
         right.setRotationPoint(-4.641F, 0.8F, 4.64F);
         right.setScale(0.58F);
         right.setThickness(0.65F);
+        right.setPrecision(4);
         setRotation(right, 0.0F, 1.5707964F, 0.0F);
         addChild(right);
 
@@ -17,6 +18,7 @@ public class ModelHeadwear extends ModelScaleRenderer {
         left.setRotationPoint(4.639F, 0.8F, -4.64F);
         left.setScale(0.58F);
         left.setThickness(0.65F);
+        left.setPrecision(4);
         setRotation(left, 0.0F, -1.5707964F, 0.0F);
         addChild(left);
 
@@ -24,6 +26,7 @@ public class ModelHeadwear extends ModelScaleRenderer {
         front.setRotationPoint(-4.64F, 0.801F, -4.641F);
         front.setScale(0.58F);
         front.setThickness(0.65F);
+        front.setPrecision(4);
         setRotation(front, 0.0F, 0.0F, 0.0F);
         addChild(front);
 
@@ -31,6 +34,7 @@ public class ModelHeadwear extends ModelScaleRenderer {
         back.setRotationPoint(4.64F, 0.801F, 4.639F);
         back.setScale(0.58F);
         back.setThickness(0.65F);
+        back.setPrecision(4);
         setRotation(back, 0.0F, 3.1415927F, 0.0F);
         addChild(back);
 
@@ -38,6 +42,7 @@ public class ModelHeadwear extends ModelScaleRenderer {
         top.setRotationPoint(-4.64F, -8.5F, -4.64F);
         top.setScale(0.5799F);
         top.setThickness(0.65F);
+        top.setPrecision(4);
         setRotation(top, -1.5707964F, 0.0F, 0.0F);
         addChild(top);
 
@@ -45,6 +50,7 @@ public class ModelHeadwear extends ModelScaleRenderer {
         bottom.setRotationPoint(-4.64F, 0.0F, -4.64F);
         bottom.setScale(0.5799F);
         bottom.setThickness(0.65F);
+        bottom.setPrecision(4);
         setRotation(bottom, -1.5707964F, 0.0F, 0.0F);
         addChild(bottom);
     }

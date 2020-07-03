@@ -15,6 +15,7 @@ public class ModelHair extends ModelPartInterface {
         this.model = new Model2DRenderer(base, 56.0F, 20.0F, 8, 12);
         this.model.setRotationPoint(-4.0F, 12.0F, 3.0F);
         this.model.setScale(0.75F);
+        this.model.setPrecision(4);
         addChild(this.model);
     }
 

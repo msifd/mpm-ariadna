@@ -66,10 +66,11 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
         for (int i = 0; i < 2; i++) {
             final boolean leftSide = i % 2 == 0;
             final int side = leftSide ? -1 : 1;
-            final ModelRenderer ear = new ModelRenderer(this.base, 24, 0);
+            final Model2DRenderer ear = new Model2DRenderer(this.base, 24, 0, 3, 8);
             ear.mirror = leftSide;
-            ear.addBox(-1.5f, 0, -0.5f, 3, 7, 1);
-            ear.setRotationPoint(-4f * side, -4f, 0);
+            ear.setScale(0.5f);
+            ear.setPrecision(4);
+            ear.setRotationPoint(-5.5f * side, -9f, 1);
             ear.rotateAngleX = (float) Math.PI * 0.3f;
             ear.rotateAngleY = (float) Math.PI * -0.3f * side;
             ear.rotateAngleZ = (float) Math.PI * 0.65f * side;
@@ -81,10 +82,11 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
         for (int i = 0; i < 2; i++) {
             final boolean leftSide = i % 2 == 0;
             final int side = leftSide ? -1 : 1;
-            final ModelRenderer ear = new ModelRenderer(this.base, 24, 0);
+            final Model2DRenderer ear = new Model2DRenderer(this.base, 24, 0, 3, 8);
             ear.mirror = leftSide;
-            ear.addBox(-1.5f, 0, -0.5f, 3, 7, 1);
-            ear.setRotationPoint(-4f * side, -4f, 0);
+            ear.setScale(0.5f);
+            ear.setPrecision(4);
+            ear.setRotationPoint(-10f * side, -5.5f, -1.5f);
             ear.rotateAngleX = (float) Math.PI * 0.0f;
             ear.rotateAngleY = (float) Math.PI * -0.0f * side;
             ear.rotateAngleZ = (float) Math.PI * 0.5f * side;

@@ -66,11 +66,13 @@ public class ModelEars extends noppes.mpm.client.model.ModelPartInterface {
         for (int i = 0; i < 2; i++) {
             final boolean leftSide = i % 2 == 0;
             final int side = leftSide ? -1 : 1;
+            final float thickness = 0.5f;
             final Model2DRenderer ear = new Model2DRenderer(this.base, 24, 0, 3, 8);
             ear.mirror = leftSide;
-            ear.setScale(0.5f);
+            ear.setScale(0.6f);
+            ear.setThickness(thickness);
             ear.setPrecision(4);
-            ear.setRotationPoint(-5.5f * side, -9f, 1);
+            ear.setRotationPoint(-6f * side + thickness / 2, -11f, 2.5f);
             ear.rotateAngleX = (float) Math.PI * 0.3f;
             ear.rotateAngleY = (float) Math.PI * -0.3f * side;
             ear.rotateAngleZ = (float) Math.PI * 0.65f * side;

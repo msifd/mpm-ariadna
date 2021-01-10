@@ -264,25 +264,30 @@ public class ModelMPM extends ModelBiped {
     }
 
     private void renderHead(Entity entity, float f) {
-        if (data.noHead)
+        if (data.getHeadCount() == 0)
             return;
 
         bindPlayerTexture();
 
-        float x = 0;
         float y = data.getBodyY();
-        float z = 0.0F;
+
+        final int headCount = data.getHeadCount();
+        final float headWidth = data.head.scaleX * 0.6f;
+        final float headOffset = (headCount - 1) * headWidth * 0.5f;
 
         GL11.glPushMatrix();
+
         if (data.animation == EnumAnimation.DANCING) {
             float dancing = entity.ticksExisted / 4.0F;
             GL11.glTranslatef((float) Math.sin(dancing) * 0.075F, (float) Math.abs(Math.cos(dancing)) * 0.125F - 0.02F, (float) -Math.abs(Math.cos(dancing)) * 0.075F);
         }
-        ModelPartConfig head = data.head;
+
         if ((bipedHeadwear.showModel) && (!bipedHeadwear.isHidden)) {
             if ((data.headwear == 1) || (isArmor)) {
-                ((ModelScaleRenderer) bipedHeadwear).setConfig(head, x, y, z);
-                ((ModelScaleRenderer) bipedHeadwear).render(f);
+                for (int i = 0; i < headCount; i++) {
+                    ((ModelScaleRenderer) bipedHeadwear).setConfig(data.head, -headOffset + i * headWidth, y, 0);
+                    ((ModelScaleRenderer) bipedHeadwear).render(f);
+                }
             } else if (data.headwear == 2) {
                 headwear.rotateAngleX = bipedHeadwear.rotateAngleX;
                 headwear.rotateAngleY = bipedHeadwear.rotateAngleY;
@@ -290,12 +295,18 @@ public class ModelMPM extends ModelBiped {
                 headwear.rotationPointX = bipedHeadwear.rotationPointX;
                 headwear.rotationPointY = bipedHeadwear.rotationPointY;
                 headwear.rotationPointZ = bipedHeadwear.rotationPointZ;
-                headwear.setConfig(head, x, y, z);
-                headwear.render(f);
+
+                for (int i = 0; i < headCount; i++) {
+                    headwear.setConfig(data.head, -headOffset + i * headWidth, y, 0);
+                    headwear.render(f);
+                }
             }
         }
-        ((ModelScaleRenderer) bipedHead).setConfig(head, x, y, z);
-        ((ModelScaleRenderer) bipedHead).render(f);
+
+        for (int i = 0; i < headCount; i++) {
+            ((ModelScaleRenderer) bipedHead).setConfig(data.head, -headOffset + i * headWidth, y, 0);
+            ((ModelScaleRenderer) bipedHead).render(f);
+        }
 
         GL11.glPopMatrix();
     }

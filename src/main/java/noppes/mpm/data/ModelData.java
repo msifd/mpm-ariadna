@@ -106,7 +106,7 @@ public class ModelData extends ModelDataShared implements IExtendedEntityPropert
                     .append(this.url)
                     // Ari extra
                     .append(armsAmputee)
-                    .append(noHead);
+                    .append(headType);
 
             for (String name : this.parts.keySet()) {
                 toHash.append(name)
@@ -152,5 +152,16 @@ public class ModelData extends ModelDataShared implements IExtendedEntityPropert
     }
 
     public void init(Entity entity, World world) {
+    }
+
+    public int getHeadCount() {
+        switch (headType) {
+            case 0:
+                return 1;
+            case 1:
+                return 0;
+            default:
+                return headType;
+        }
     }
 }

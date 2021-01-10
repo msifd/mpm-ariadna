@@ -14,7 +14,7 @@ public class GuiModelHead extends GuiModelInterface {
     private static final String[] arrSnout = {"gui.no", "Player Small", "Player Medium", "Player Large", "Player Bunny", "Small1", "Medium1", "Large1", "Bunny1", "Beak1"};
     private static final String[] arrEars = {"gui.no", "Player", "Player Bunny", "Bunny", "Type1", "Elf up", "Elf sides"};
     private static final String[] arrHorns = {"gui.no", "Player Bull", "Player Antlers", "Player AntennasB", "Player AntennasF", "Bull", "Antlers", "AntennasB", "AntennasF", "Forehead small"};
-    private static final String[] arrNoHead = {"gui.no", "gui.yes"};
+    private static final String[] arrHead = {"Single", "Missing", "Double", "Triple"};
 
     private GuiScreen parent;
 
@@ -76,8 +76,8 @@ public class GuiModelHead extends GuiModelInterface {
         }
 
         y += 22;
-        addButton(new GuiNpcButton(7, this.guiLeft + 50, y, 70, 20, arrNoHead, this.playerdata.noHead ? 1 : 0));
-        addLabel(new GuiNpcLabel(7, "No head", this.guiLeft, y + 5, 16777215));
+        addButton(new GuiNpcButton(7, this.guiLeft + 50, y, 70, 20, arrHead, this.playerdata.headType));
+        addLabel(new GuiNpcLabel(7, "Heads", this.guiLeft, y + 5, 16777215));
     }
 
     private int getEars(ModelPartData data) {
@@ -219,9 +219,10 @@ public class GuiModelHead extends GuiModelInterface {
         }
 
         if (button.id == 7) {
-            int value = button.getValue();
-            System.out.println(value);
-            playerdata.noHead = value == 1;
+            int nextMode = button.getValue();
+            if (nextMode >= arrHead.length) nextMode = 0;
+            this.playerdata.headType = (byte) nextMode;
+
             initGui();
         }
 
